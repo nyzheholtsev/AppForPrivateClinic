@@ -63,17 +63,17 @@
             // PatientsDataGridView
             // 
             PatientsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            PatientsDataGridView.Location = new Point(390, 47);
+            PatientsDataGridView.Location = new Point(401, 47);
             PatientsDataGridView.Name = "PatientsDataGridView";
             PatientsDataGridView.RowHeadersWidth = 51;
-            PatientsDataGridView.Size = new Size(361, 359);
+            PatientsDataGridView.Size = new Size(361, 324);
             PatientsDataGridView.TabIndex = 3;
             // 
             // PatientSearchForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 400);
             Controls.Add(PatientsDataGridView);
             Controls.Add(SearchTextBox);
             Controls.Add(NewPatientButton);

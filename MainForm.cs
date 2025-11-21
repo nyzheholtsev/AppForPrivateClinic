@@ -120,12 +120,22 @@ namespace program
 
         private void PatientSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: проверить открытие
+   
+            foreach (Form f in this.MdiChildren)
+            {
+                if (f is PatientSearchForm)
+                {
+                    f.Activate();
+                    return;
+                }
+            }
 
             PatientSearchForm searchForm = new PatientSearchForm(_currentUser);
+            searchForm.MdiParent = this;
 
-            searchForm.MdiParent = this; 
-            searchForm.Show();           
+            searchForm.WindowState = FormWindowState.Maximized;// открываем на весь
+
+            searchForm.Show();
         }
 
 

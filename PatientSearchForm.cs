@@ -12,6 +12,8 @@ namespace program
         {
             InitializeComponent();
             _currentUser = user;
+
+            this.FormBorderStyle = FormBorderStyle.None; //- рамка формы
         }
 
         private void PatientSearchForm_Load(object sender, EventArgs e)
