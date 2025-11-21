@@ -236,6 +236,7 @@ namespace program.dbClass
             SELECT 
                 u.UserID, 
                 u.FullName, 
+                u.Specialization,
                 r.RoleName 
             FROM Users u
             JOIN Roles r ON u.RoleID = r.RoleID

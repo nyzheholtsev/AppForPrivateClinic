@@ -13,7 +13,7 @@ namespace program
         {
             _currentUser = user;
             _currentLang = language;
-
+                
             InitializeComponent();
 
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -24,11 +24,12 @@ namespace program
 
             MainMenuStrip.Renderer = new CustomMenuRenderer();
 
+            MainStatusStrip.Dock = DockStyle.Bottom;
+            MainStatusStrip.BringToFront();
+
             LocalizationManager.LoadLanguage(_currentLang);
             ApplyLocalization();
-
             SetupUiForRole();
-
             BindMenuEvents();
         }
 
@@ -36,7 +37,7 @@ namespace program
         {
             this.Text = string.Format(LocalizationManager.GetString("MainForm_Title"), _currentUser.RoleName);
 
-            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName, _currentUser.Specialization, _currentUser.RoleName);
+            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName, _currentUser.RoleName);
 
             FileToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File");
             FileExitToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_Exit");
@@ -192,7 +193,9 @@ namespace program
 
             this.Controls.Add(newForm);
             newForm.Show();
+
             MainMenuStrip.BringToFront();
+            MainStatusStrip.BringToFront();
         }
 
         private class CustomMenuRenderer : ToolStripProfessionalRenderer // кастом рендеринг

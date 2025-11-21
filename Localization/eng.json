@@ -9,7 +9,7 @@
 
   // ============================================================
   "MainForm_Title": "Clinic System (Mode: {0})",
-  "MainForm_UserStatus": "User: {0}       Specialization: {1}       Mode: {2}",
+  "MainForm_UserStatus": "User: {0}       Mode: {1}",
   "MainForm_LangToggleButton": "UKR",
 
   "MainForm_Menu_File": "File",
