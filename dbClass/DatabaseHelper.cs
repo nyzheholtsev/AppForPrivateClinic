@@ -55,7 +55,7 @@ namespace program.dbClass
                 UserID INTEGER PRIMARY KEY AUTOINCREMENT,
                 RoleID INTEGER NOT NULL,
                 FullName TEXT NOT NULL,
-                Specialization TEXT,  -- Исправлено (убрали NULLABLE и лишнюю L)
+                Specialization TEXT,
                 Username TEXT NOT NULL UNIQUE,
                 PasswordHash TEXT NOT NULL,
                 IsActive INTEGER DEFAULT 1,
@@ -84,8 +84,8 @@ namespace program.dbClass
             );");
 
             ExecuteSql(connection, @"
-            CREATE TABLE Appointments (  -- Исправлено A -> E
-                AppointmentID INTEGER PRIMARY KEY AUTOINCREMENT, -- Исправлено A -> E
+            CREATE TABLE Appointments (
+                AppointmentID INTEGER PRIMARY KEY AUTOINCREMENT,
                 PatientID INTEGER NOT NULL,
                 UserID INTEGER NOT NULL,
                 AppointmentDate TEXT NOT NULL,
@@ -98,8 +98,8 @@ namespace program.dbClass
             ExecuteSql(connection, @"
             CREATE TABLE MedicalRecords (
                 MedicalRecordID INTEGER PRIMARY KEY AUTOINCREMENT,
-                AppointmentID INTEGER NOT NULL,  -- Исправлено A -> E
-                Diagnosis TEXT NOT NULL,         -- Исправлено Diadnosis -> Diagnosis
+                AppointmentID INTEGER NOT NULL,
+                Diagnosis TEXT NOT NULL,
                 Treatment TEXT NOT NULL,
                 Notes TEXT NOT NULL,
                 FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID)
@@ -112,33 +112,74 @@ namespace program.dbClass
             foreach (string role in roles)
             {
                 ExecuteSql(connection, "INSERT INTO Roles (RoleName) VALUES (@name)", new[] {
-                    new SQLiteParameter("@name", role)
-                });
+            new SQLiteParameter("@name", role)
+        });
             }
 
             string adminHash = PasswordHelper.ComputeHash("admin");
             string sqlAdmin = @"
-                INSERT INTO Users (RoleID, FullName, Username, PasswordHash) 
-                VALUES (
-                    (SELECT RoleID FROM Roles WHERE RoleName = 'Головний Лікар'), 
-                    'Нижегольцев Владислав Іванович', 'admin', @hash
-                );";
+            INSERT INTO Users (RoleID, FullName, Specialization, Username, PasswordHash) 
+            VALUES (
+                (SELECT RoleID FROM Roles WHERE RoleName = 'Головний Лікар'), 
+                'Нижегольцев Владислав Іванович', 
+                'Організація охорони здоров''я',
+                'admin', 
+                @hash
+            );";
             ExecuteSql(connection, sqlAdmin, new[] { new SQLiteParameter("@hash", adminHash) });
 
-            SeedPatient(connection, "Пацієнт 1", "1980-05-15", "+380501234567");
-            SeedPatient(connection, "Пацієнт 2", "1992-11-30", "+380677654321");
+            string docHash = PasswordHelper.ComputeHash("doc");
+            string sqlDoc = @"
+            INSERT INTO Users (RoleID, FullName, Specialization, Username, PasswordHash) 
+            VALUES (
+                (SELECT RoleID FROM Roles WHERE RoleName = 'Лікар'), 
+                'Петренко Петро Сергійович', 
+                'Терапевт', 
+                'doc', 
+                @hash
+            );";
+            ExecuteSql(connection, sqlDoc, new[] { new SQLiteParameter("@hash", docHash) });
+
+            SeedScheduleForDoctor(connection, 2);
+
+            SeedPatient(connection, "Тестовий Пацієнт", "1980-05-15", "+380501234567");
+            SeedPatient(connection, "Іванов Іван", "1992-11-30", "+380677654321");
         }
+
 
         private static void SeedPatient(SQLiteConnection connection, string name, string dob, string phone)
         {
             string sql = "INSERT INTO Patients (FullName, DateOfBirth, Contacts, CreatedDate) VALUES (@name, @dob, @phone, @date)";
             ExecuteSql(connection, sql, new[] {
-                new SQLiteParameter("@name", name),
-                new SQLiteParameter("@dob", dob),
-                new SQLiteParameter("@phone", phone),
-                new SQLiteParameter("@date", DateTime.Now.ToString("yyyy-MM-dd"))
-            });
+        new SQLiteParameter("@name", name),
+        new SQLiteParameter("@dob", dob),
+        new SQLiteParameter("@phone", phone),
+        new SQLiteParameter("@date", DateTime.Now.ToString("yyyy-MM-dd"))
+    });
         }
+
+        private static void SeedScheduleForDoctor(SQLiteConnection connection, int doctorId)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                string date = DateTime.Now.AddDays(i).ToString("yyyy-MM-dd");
+
+                string sql = @"
+                INSERT INTO DoctorSchedules (UserID, WorkDate, StartTime, EndTime, LunchStart, LunchEnd)
+                VALUES (@uid, @date, @start, @end, @lStart, @lEnd)";
+
+                ExecuteSql(connection, sql, new[] {
+                new SQLiteParameter("@uid", doctorId),
+                new SQLiteParameter("@date", date),
+                new SQLiteParameter("@start", "09:00"),
+                new SQLiteParameter("@end", "17:00"),
+                new SQLiteParameter("@lStart", "13:00"),
+                new SQLiteParameter("@lEnd", "14:00")
+            });
+            }
+        }
+
+
         private static void ExecuteSql(SQLiteConnection connection, string sql, SQLiteParameter[] parameters = null) // - лишние дублирование
         {
             using (var command = new SQLiteCommand(sql, connection))
@@ -222,6 +263,7 @@ namespace program.dbClass
                                 {
                                     UserID = Convert.ToInt32(reader["UserID"]),
                                     FullName = reader["FullName"].ToString(),
+                                    Specialization = reader["Specialization"].ToString(),
                                     RoleName = reader["RoleName"].ToString()
                                 };
                             }

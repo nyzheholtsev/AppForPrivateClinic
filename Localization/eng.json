@@ -6,10 +6,10 @@
   "LoginForm_LangToggleButton": "UKR",
   "LoginForm_ErrorEmpty": "Username and password cannot be empty.",
   "LoginForm_ErrorInvalid": "Invalid username or password!",
- 
-   // ============================================================
+
+  // ============================================================
   "MainForm_Title": "Clinic System (Mode: {0})",
-  "MainForm_UserStatus": "User: {0}       Mode: {1}",
+  "MainForm_UserStatus": "User: {0}       Specialization: {1}       Mode: {2}",
   "MainForm_LangToggleButton": "UKR",
 
   "MainForm_Menu_File": "File",
@@ -27,7 +27,7 @@
   "MainForm_Menu_Admin": "Administration",
   "MainForm_Menu_Admin_Users": "Manage Staff",
   "MainForm_Menu_Admin_Stats": "Statistics",
-  
+
   // ============================================================
   "PatientSearchForm_SearchButton": "Search",
   "PatientSearchForm_NewButton": "New Patient"

@@ -1,20 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using program.dbClass;
+using program.Localization;
+
 
 namespace program.Forms
 {
-    public partial class PatientAddForm : Form
+    public partial class PatientAddForm : Form, Localizable
     {
-        public PatientAddForm()
-        {
+        private UserModel _currentUser;
+        public PatientAddForm(UserModel user)
+        {   
             InitializeComponent();
+            _currentUser = user;
+        }
+
+        public void UpdateLocalization()
+        {
+            
+        }
+
+        private void PatientAddForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

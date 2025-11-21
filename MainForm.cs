@@ -1,4 +1,5 @@
 ﻿using program.dbClass;
+using program.Forms;
 using program.Localization;
 
 namespace program
@@ -22,7 +23,7 @@ namespace program
         {
 
             MainMenuStrip.Renderer = new CustomMenuRenderer();
-            
+
             LocalizationManager.LoadLanguage(_currentLang);
             ApplyLocalization();
 
@@ -30,12 +31,12 @@ namespace program
 
             BindMenuEvents();
         }
-        
+
         private void ApplyLocalization()
         {
             this.Text = string.Format(LocalizationManager.GetString("MainForm_Title"), _currentUser.RoleName);
 
-            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName, _currentUser.RoleName);
+            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName, _currentUser.Specialization, _currentUser.RoleName);
 
             FileToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File");
             FileExitToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_Exit");
@@ -89,61 +90,12 @@ namespace program
 
             FileExitToolStripMenuItem.Click += (s, e) => Application.Exit();
             PatientSearchToolStripMenuItem.Click += PatientSearchToolStripMenuItem_Click;
-
-            PatientNewToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Новий пацієнт'");
+            PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
             ScheduleToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Календар/Розклад'");
             MyQueueToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Моя черга'");
             ManageUsersToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Керування персоналом'");
             StatisticsToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Статистика'");
         }
-
-
-        private void PatientSearchToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PatientSearchForm searchForm = new PatientSearchForm(_currentUser);
-            OpenPage(new PatientSearchForm(_currentUser));
-        }
-
-        private void OpenPage(Form newForm)
-        {
-            List<Control> controlsToRemove = new List<Control>(); // поиск + удаления =- старые формы
-
-            foreach (Control c in this.Controls)
-            {
-                if (c is Form) // if c == Form открытая форма
-                {
-                    controlsToRemove.Add(c);
-                }
-            }
-
-            foreach (Control c in controlsToRemove)
-            {
-                this.Controls.Remove(c);
-                c.Dispose();
-            } // удалили + очистили
-
-
-            newForm.TopLevel = false;
-            newForm.FormBorderStyle = FormBorderStyle.None;
-            newForm.Dock = DockStyle.Fill;
-
-
-            this.Controls.Add(newForm);
-            newForm.Show();
-            MainMenuStrip.BringToFront();
-        }
-
-        private class CustomMenuRenderer : ToolStripProfessionalRenderer // кастом рендеринг
-        {
-            public CustomMenuRenderer() : base(new CustomColorTable()) { }
-
-            protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
-            {
-                e.TextColor = Color.Wheat;
-                base.OnRenderItemText(e);
-            }
-        }
-
 
         private class CustomColorTable : ProfessionalColorTable
         {
@@ -211,6 +163,51 @@ namespace program
                 get { return _defaultGray; }
             }
         }
+        
+
+
+        private void OpenPage(Form newForm)
+        {
+            List<Control> controlsToRemove = new List<Control>(); // поиск + удаления =- старые формы
+
+            foreach (Control c in this.Controls)
+            {
+                if (c is Form) // if c == Form открытая форма
+                {
+                    controlsToRemove.Add(c);
+                }
+            }
+
+            foreach (Control c in controlsToRemove)
+            {
+                this.Controls.Remove(c);
+                c.Dispose();
+            } // удалили + очистили
+
+
+            newForm.TopLevel = false;
+            newForm.FormBorderStyle = FormBorderStyle.None;
+            newForm.Dock = DockStyle.Fill;
+
+
+            this.Controls.Add(newForm);
+            newForm.Show();
+            MainMenuStrip.BringToFront();
+        }
+
+        private class CustomMenuRenderer : ToolStripProfessionalRenderer // кастом рендеринг
+        {
+            public CustomMenuRenderer() : base(new CustomColorTable()) { }
+
+            protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
+            {
+                e.TextColor = Color.Wheat;
+                base.OnRenderItemText(e);
+            }
+        }
+
+
+        
 
         private void FileLangChangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -225,6 +222,17 @@ namespace program
                     localizableForm.UpdateLocalization();
                 }
             }
+        }
+        private void PatientSearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PatientSearchForm searchForm = new PatientSearchForm(_currentUser);
+            OpenPage(new PatientSearchForm(_currentUser));
+        }
+
+        private void PatientNewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PatientAddForm searchForm = new PatientAddForm(_currentUser);
+            OpenPage(new PatientAddForm(_currentUser));
         }
     }
 }

@@ -30,6 +30,7 @@
         {
             MainMenuStrip = new MenuStrip();
             FileToolStripMenuItem = new ToolStripMenuItem();
+            FileLangChangeToolStripMenuItem = new ToolStripMenuItem();
             FileExitToolStripMenuItem = new ToolStripMenuItem();
             RegistrarToolStripMenuItem = new ToolStripMenuItem();
             PatientSearchToolStripMenuItem = new ToolStripMenuItem();
@@ -42,7 +43,6 @@
             StatisticsToolStripMenuItem = new ToolStripMenuItem();
             MainStatusStrip = new StatusStrip();
             UserStatusLabel = new ToolStripStatusLabel();
-            FileLangChangeToolStripMenuItem = new ToolStripMenuItem();
             MainMenuStrip.SuspendLayout();
             MainStatusStrip.SuspendLayout();
             SuspendLayout();
@@ -69,11 +69,19 @@
             FileToolStripMenuItem.Size = new Size(47, 27);
             FileToolStripMenuItem.Text = "file";
             // 
+            // FileLangChangeToolStripMenuItem
+            // 
+            FileLangChangeToolStripMenuItem.BackColor = Color.Gray;
+            FileLangChangeToolStripMenuItem.Name = "FileLangChangeToolStripMenuItem";
+            FileLangChangeToolStripMenuItem.Size = new Size(185, 28);
+            FileLangChangeToolStripMenuItem.Text = "lang change";
+            FileLangChangeToolStripMenuItem.Click += FileLangChangeToolStripMenuItem_Click;
+            // 
             // FileExitToolStripMenuItem
             // 
             FileExitToolStripMenuItem.BackColor = Color.Gray;
             FileExitToolStripMenuItem.Name = "FileExitToolStripMenuItem";
-            FileExitToolStripMenuItem.Size = new Size(224, 28);
+            FileExitToolStripMenuItem.Size = new Size(185, 28);
             FileExitToolStripMenuItem.Text = "exit";
             // 
             // RegistrarToolStripMenuItem
@@ -98,6 +106,7 @@
             PatientNewToolStripMenuItem.Name = "PatientNewToolStripMenuItem";
             PatientNewToolStripMenuItem.Size = new Size(224, 28);
             PatientNewToolStripMenuItem.Text = "PatientNew";
+            PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
             // 
             // ScheduleToolStripMenuItem
             // 
@@ -164,14 +173,6 @@
             UserStatusLabel.Name = "UserStatusLabel";
             UserStatusLabel.Size = new Size(160, 23);
             UserStatusLabel.Text = "toolStripStatusLabel";
-            // 
-            // FileLangChangeToolStripMenuItem
-            // 
-            FileLangChangeToolStripMenuItem.BackColor = Color.Gray;
-            FileLangChangeToolStripMenuItem.Name = "FileLangChangeToolStripMenuItem";
-            FileLangChangeToolStripMenuItem.Size = new Size(224, 28);
-            FileLangChangeToolStripMenuItem.Text = "lang change";
-            FileLangChangeToolStripMenuItem.Click += FileLangChangeToolStripMenuItem_Click;
             // 
             // MainForm
             // 

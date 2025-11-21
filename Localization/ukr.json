@@ -9,7 +9,7 @@
 
 	// ============================================================
 	"MainForm_Title": "Система Клініки (Режим: {0})",
-	"MainForm_UserStatus": "Користувач: {0}       Режим: {1}",
+	"MainForm_UserStatus": "Користувач: {0}       Спеціалізація: {1}       Режим: {2}",
 	"MainForm_LangToggleButton": "EN",
 
 	"MainForm_Menu_File": "Файл",

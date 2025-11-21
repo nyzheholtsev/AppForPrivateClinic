@@ -28,11 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            SuspendLayout();
+            // 
+            // PatientAddForm
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
             ClientSize = new Size(800, 400);
-            this.Text = "PatientAddForm";
+            Name = "PatientAddForm";
+            Text = "PatientAddForm";
+            Load += PatientAddForm_Load;
+            ResumeLayout(false);
         }
 
         #endregion
