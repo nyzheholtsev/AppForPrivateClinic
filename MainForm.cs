@@ -30,6 +30,7 @@ namespace program
             SetupUiForRole();
 
             BindMenuEvents();
+           
         }
 
         private void ApplyLocalization()
@@ -163,7 +164,7 @@ namespace program
                 get { return _defaultGray; }
             }
         }
-        
+
 
 
         private void OpenPage(Form newForm)
@@ -207,7 +208,7 @@ namespace program
         }
 
 
-        
+
 
         private void FileLangChangeToolStripMenuItem_Click(object sender, EventArgs e)
         {
