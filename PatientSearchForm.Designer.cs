@@ -37,7 +37,7 @@
             // 
             // SearchButton
             // 
-            SearchButton.Location = new Point(290, 98);
+            SearchButton.Location = new Point(594, 55);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(94, 29);
             SearchButton.TabIndex = 0;
@@ -46,27 +46,28 @@
             // 
             // NewPatientButton
             // 
-            NewPatientButton.Location = new Point(290, 47);
+            NewPatientButton.Location = new Point(694, 55);
             NewPatientButton.Name = "NewPatientButton";
             NewPatientButton.Size = new Size(94, 29);
             NewPatientButton.TabIndex = 1;
             NewPatientButton.Text = "NewPatientButton";
             NewPatientButton.UseVisualStyleBackColor = true;
+            NewPatientButton.Click += NewPatientButton_Click_1;
             // 
             // SearchTextBox
             // 
-            SearchTextBox.Location = new Point(30, 100);
+            SearchTextBox.Location = new Point(12, 56);
             SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.Size = new Size(254, 27);
+            SearchTextBox.Size = new Size(576, 27);
             SearchTextBox.TabIndex = 2;
             // 
             // PatientsDataGridView
             // 
             PatientsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            PatientsDataGridView.Location = new Point(401, 47);
+            PatientsDataGridView.Location = new Point(12, 104);
             PatientsDataGridView.Name = "PatientsDataGridView";
             PatientsDataGridView.RowHeadersWidth = 51;
-            PatientsDataGridView.Size = new Size(361, 324);
+            PatientsDataGridView.Size = new Size(776, 267);
             PatientsDataGridView.TabIndex = 3;
             // 
             // PatientSearchForm

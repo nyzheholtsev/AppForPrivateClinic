@@ -13,7 +13,7 @@ namespace program
             InitializeComponent();
             _currentUser = user;
 
-            this.FormBorderStyle = FormBorderStyle.None; //- рамка формы
+            this.FormBorderStyle = FormBorderStyle.None; // - края
         }
 
         private void PatientSearchForm_Load(object sender, EventArgs e)
@@ -49,6 +49,11 @@ namespace program
         private void NewPatientButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Тут будет открыта форма 'Новий пацієнт'");
+        }
+
+        private void NewPatientButton_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

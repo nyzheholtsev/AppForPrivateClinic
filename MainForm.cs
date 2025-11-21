@@ -26,29 +26,12 @@ namespace program
 
             MainMenuStrip.Renderer = new CustomMenuRenderer();
 
-            PaintMdiBackground();
-
             ApplyLocalization();
 
             SetupUiForRole();
 
             BindMenuEvents();
         }
-
-
-        private void PaintMdiBackground()
-        {
-            foreach (Control control in this.Controls)
-            {
-                MdiClient client = control as MdiClient;
-                if (client != null)
-                {
-                    client.BackColor = Color.FromArgb(68, 68, 68);
-                    break;
-                }
-            }
-        }
-
 
         private void SetupUiForRole()
         {
@@ -69,8 +52,8 @@ namespace program
 
                 case "Лікар":
                     RegistrarToolStripMenuItem.Visible = true;
-                    PatientNewToolStripMenuItem.Visible = false;    
-                    ScheduleToolStripMenuItem.Visible = false;  
+                    PatientNewToolStripMenuItem.Visible = false;
+                    ScheduleToolStripMenuItem.Visible = false;
                     DoctorToolStripMenuItem.Visible = true;
                     break;
 
@@ -120,26 +103,35 @@ namespace program
 
         private void PatientSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-   
-            foreach (Form f in this.MdiChildren)
+
+            foreach (Control c in this.Controls)
             {
-                if (f is PatientSearchForm)
+                if (c is PatientSearchForm)
                 {
-                    f.Activate();
+                    c.BringToFront();
+                    MainMenuStrip.BringToFront();
                     return;
                 }
             }
 
             PatientSearchForm searchForm = new PatientSearchForm(_currentUser);
-            searchForm.MdiParent = this;
 
-            searchForm.WindowState = FormWindowState.Maximized;// открываем на весь
+
+            searchForm.TopLevel = false;
+            searchForm.FormBorderStyle = FormBorderStyle.None; // - рамка
+            searchForm.Dock = DockStyle.Fill; // + на весь экран
+
+
+            this.Controls.Add(searchForm);
 
             searchForm.Show();
+            searchForm.BringToFront();
+
+            MainMenuStrip.BringToFront(); // меню поверх всех форм
         }
 
 
-        
+
         private class CustomMenuRenderer : ToolStripProfessionalRenderer
         {
             public CustomMenuRenderer() : base(new CustomColorTable()) { }
@@ -217,11 +209,6 @@ namespace program
             {
                 get { return _defaultGray; }
             }
-        }
-
-        private void MainForm_Load_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
