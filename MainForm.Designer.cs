@@ -160,6 +160,7 @@
             MainStatusStrip.ImageScalingSize = new Size(20, 20);
             MainStatusStrip.Items.AddRange(new ToolStripItem[] { UserStatusLabel });
             MainStatusStrip.Location = new Point(0, 421);
+            MainStatusStrip.Dock = DockStyle.Bottom;
             MainStatusStrip.Name = "MainStatusStrip";
             MainStatusStrip.Size = new Size(800, 29);
             MainStatusStrip.TabIndex = 2;
