@@ -28,7 +28,7 @@ namespace program.dbClass
                     {
                         CreateTables(connection);
                         SeedDefaultData(connection);
-
+                        
                         transaction.Commit();
                     }
                 }
@@ -45,30 +45,65 @@ namespace program.dbClass
         private static void CreateTables(SQLiteConnection connection)
         {
             ExecuteSql(connection, @"
-                CREATE TABLE Roles (
-                    RoleID INTEGER PRIMARY KEY AUTOINCREMENT,
-                    RoleName TEXT NOT NULL UNIQUE
-                );");
+            CREATE TABLE Roles (
+                RoleID INTEGER PRIMARY KEY AUTOINCREMENT,
+                RoleName TEXT NOT NULL UNIQUE
+            );");
 
             ExecuteSql(connection, @"
-                CREATE TABLE Users (
-                    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
-                    RoleID INTEGER NOT NULL,
-                    FullName TEXT NOT NULL,
-                    Username TEXT NOT NULL UNIQUE,
-                    PasswordHash TEXT NOT NULL,
-                    IsActive INTEGER DEFAULT 1,
-                    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
-                );");
+            CREATE TABLE Users (
+                UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+                RoleID INTEGER NOT NULL,
+                FullName TEXT NOT NULL,
+                Specialization TEXT,  -- Исправлено (убрали NULLABLE и лишнюю L)
+                Username TEXT NOT NULL UNIQUE,
+                PasswordHash TEXT NOT NULL,
+                IsActive INTEGER DEFAULT 1,
+                FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
+            );");
 
             ExecuteSql(connection, @"
-                CREATE TABLE Patients (
-                    PatientID INTEGER PRIMARY KEY AUTOINCREMENT,
-                    FullName TEXT NOT NULL,
-                    DateOfBirth TEXT NOT NULL,
-                    Contacts TEXT NOT NULL,
-                    CreatedDate TEXT NOT NULL
-                );");
+            CREATE TABLE Patients (
+                PatientID INTEGER PRIMARY KEY AUTOINCREMENT,
+                FullName TEXT NOT NULL,
+                DateOfBirth TEXT NOT NULL,
+                Contacts TEXT NOT NULL,
+                CreatedDate TEXT NOT NULL
+            );");
+
+            ExecuteSql(connection, @"
+            CREATE TABLE DoctorSchedules (
+                ScheduleID INTEGER PRIMARY KEY AUTOINCREMENT,
+                UserID INTEGER NOT NULL,
+                WorkDate TEXT NOT NULL,
+                StartTime TEXT NOT NULL,
+                EndTime TEXT NOT NULL,
+                LunchStart TEXT NOT NULL,
+                LunchEnd TEXT NOT NULL,
+                FOREIGN KEY (UserID) REFERENCES Users(UserID)
+            );");
+
+            ExecuteSql(connection, @"
+            CREATE TABLE Appointments (  -- Исправлено A -> E
+                AppointmentID INTEGER PRIMARY KEY AUTOINCREMENT, -- Исправлено A -> E
+                PatientID INTEGER NOT NULL,
+                UserID INTEGER NOT NULL,
+                AppointmentDate TEXT NOT NULL,
+                AppointmentTime TEXT NOT NULL,
+                Status TEXT NOT NULL,
+                FOREIGN KEY (PatientID) REFERENCES Patients(PatientID),
+                FOREIGN KEY (UserID) REFERENCES Users(UserID)
+            );");
+
+            ExecuteSql(connection, @"
+            CREATE TABLE MedicalRecords (
+                MedicalRecordID INTEGER PRIMARY KEY AUTOINCREMENT,
+                AppointmentID INTEGER NOT NULL,  -- Исправлено A -> E
+                Diagnosis TEXT NOT NULL,         -- Исправлено Diadnosis -> Diagnosis
+                Treatment TEXT NOT NULL,
+                Notes TEXT NOT NULL,
+                FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID)
+            );");
         }
 
         private static void SeedDefaultData(SQLiteConnection connection)

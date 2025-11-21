@@ -33,6 +33,29 @@ namespace program
 
             BindMenuEvents();
         }
+        
+        private void ApplyLocalization()
+        {
+            this.Text = string.Format(LocalizationManager.GetString("MainForm_Title"), _currentUser.RoleName);
+
+            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName, _currentUser.RoleName);
+
+            FileToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File");
+            FileExitToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_Exit");
+            FileLangChangeToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_LangChange");
+
+            RegistrarToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar");
+            PatientSearchToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Search");
+            PatientNewToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_New");
+            ScheduleToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Schedule");
+
+            DoctorToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Doctor");
+            MyQueueToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Doctor_Queue");
+
+            AdminToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Admin");
+            ManageUsersToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Admin_Users");
+            StatisticsToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Admin_Stats");
+        }
 
         private void SetupUiForRole()
         {
@@ -64,31 +87,6 @@ namespace program
             }
         }
 
-
-        private void ApplyLocalization()
-        {
-            this.Text = string.Format(LocalizationManager.GetString("MainForm_Title"), _currentUser.RoleName);
-
-            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName, _currentUser.RoleName);
-
-            FileToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File");
-            FileExitToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_Exit");
-            FileLangChangeToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_LangChange");
-
-            RegistrarToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar");
-            PatientSearchToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Search");
-            PatientNewToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_New");
-            ScheduleToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Schedule");
-
-            DoctorToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Doctor");
-            MyQueueToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Doctor_Queue");
-
-            AdminToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Admin");
-            ManageUsersToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Admin_Users");
-            StatisticsToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Admin_Stats");
-        }
-
-
         private void BindMenuEvents()
         {
 
@@ -105,36 +103,40 @@ namespace program
 
         private void PatientSearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            PatientSearchForm searchForm = new PatientSearchForm(_currentUser);
+            OpenPage(new PatientSearchForm(_currentUser));
+        }
+
+        private void OpenPage(Form newForm)
+        {
+            List<Control> controlsToRemove = new List<Control>(); // поиск + удаления =- старые формы
 
             foreach (Control c in this.Controls)
             {
-                if (c is PatientSearchForm)
+                if (c is Form) // if c == Form открытая форма
                 {
-                    c.BringToFront();
-                    MainMenuStrip.BringToFront();
-                    return;
+                    controlsToRemove.Add(c);
                 }
             }
 
-            PatientSearchForm searchForm = new PatientSearchForm(_currentUser);
+            foreach (Control c in controlsToRemove)
+            {
+                this.Controls.Remove(c);
+                c.Dispose();
+            } // удалили + очистили
 
 
-            searchForm.TopLevel = false;
-            searchForm.FormBorderStyle = FormBorderStyle.None; // - рамка
-            searchForm.Dock = DockStyle.Fill; // + на весь экран
+            newForm.TopLevel = false;
+            newForm.FormBorderStyle = FormBorderStyle.None;
+            newForm.Dock = DockStyle.Fill;
 
 
-            this.Controls.Add(searchForm);
-
-            searchForm.Show();
-            searchForm.BringToFront();
-
-            MainMenuStrip.BringToFront(); // меню поверх всех форм
+            this.Controls.Add(newForm);
+            newForm.Show();
+            MainMenuStrip.BringToFront();
         }
 
-
-
-        private class CustomMenuRenderer : ToolStripProfessionalRenderer
+        private class CustomMenuRenderer : ToolStripProfessionalRenderer // кастом рендеринг
         {
             public CustomMenuRenderer() : base(new CustomColorTable()) { }
 
