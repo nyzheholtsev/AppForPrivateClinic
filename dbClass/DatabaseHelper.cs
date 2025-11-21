@@ -14,115 +14,107 @@ namespace program.dbClass
 
         public static void InitializeDatabase()
         {
-            if (File.Exists(_dbFileName))
-            {
-                return;
-            }
+            if (File.Exists(_dbFileName)) return;
 
             try
             {
                 SQLiteConnection.CreateFile(_dbFileName);
+
                 using (var connection = new SQLiteConnection(_connectionString))
                 {
                     connection.Open();
 
-                    string sqlCreateRoles = @"
-                    CREATE TABLE Roles (
-                        RoleID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        RoleName TEXT NOT NULL UNIQUE
-                    );";
-                    using (var command = new SQLiteCommand(sqlCreateRoles, connection))
+                    using (var transaction = connection.BeginTransaction())
                     {
-                        command.ExecuteNonQuery();
-                    }
+                        CreateTables(connection);
+                        SeedDefaultData(connection);
 
-                    string sqlCreateUsers = @"
-                    CREATE TABLE Users (
-                        UserID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        RoleID INTEGER NOT NULL,
-                        FullName TEXT NOT NULL,
-                        Username TEXT NOT NULL UNIQUE,
-                        PasswordHash TEXT NOT NULL,
-                        IsActive INTEGER DEFAULT 1,
-                        FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
-                    );";
-                    using (var command = new SQLiteCommand(sqlCreateUsers, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-
-                    string sqlCreatePatients = @"
-                    CREATE TABLE Patients (
-                        PatientID INTEGER PRIMARY KEY AUTOINCREMENT,
-                        FullName TEXT NOT NULL,
-                        DateOfBirth TEXT NOT NULL,
-                        Contacts TEXT NOT NULL,
-                        CreatedDate TEXT NOT NULL
-                    );";
-                    using (var command = new SQLiteCommand(sqlCreatePatients, connection))
-                    {
-                        command.ExecuteNonQuery();
-                    }
-
-                    string[] roles = { "Головний Лікар", "Лікар", "Адміністратор" };
-                    string sqlInsertRole = "INSERT INTO Roles (RoleName) VALUES (@roleName);";
-                    foreach (string role in roles)
-                    {
-                        using (var command = new SQLiteCommand(sqlInsertRole, connection))
-                        {
-                            command.Parameters.AddWithValue("@roleName", role);
-                            command.ExecuteNonQuery();
-                        }
-                    }
-
-                    string adminPassHash = PasswordHelper.ComputeHash("admin");
-                    string sqlInsertAdmin = @"
-                    INSERT INTO Users (RoleID, FullName, Username, PasswordHash) 
-                    VALUES (
-                        (SELECT RoleID FROM Roles WHERE RoleName = 'Головний Лікар'), 
-                        'Главный Врач (Админ)', 
-                        'admin', 
-                        @adminHash
-                    );";
-                    using (var command = new SQLiteCommand(sqlInsertAdmin, connection))
-                    {
-                        command.Parameters.AddWithValue("@adminHash", adminPassHash);
-                        command.ExecuteNonQuery();
-                    }
-
-                    string sqlInsertPatient = @"
-                    INSERT INTO Patients (FullName, DateOfBirth, Contacts, CreatedDate) 
-                    VALUES (@FullName, @DateOfBirth, @Contacts, @CreatedDate);";
-
-                    using (var command = new SQLiteCommand(sqlInsertPatient, connection))
-                    {
-                        command.Parameters.AddWithValue("@FullName", "Іванов Іван Іванович");
-                        command.Parameters.AddWithValue("@DateOfBirth", "1980-05-15");
-                        command.Parameters.AddWithValue("@Contacts", "+380501234567");
-                        command.Parameters.AddWithValue("@CreatedDate", DateTime.Now.ToString("yyyy-MM-dd"));
-                        command.ExecuteNonQuery();
-                    }
-
-                    using (var command = new SQLiteCommand(sqlInsertPatient, connection))
-                    {
-                        command.Parameters.AddWithValue("@FullName", "Петренко Петро Петрович");
-                        command.Parameters.AddWithValue("@DateOfBirth", "1992-11-30");
-                        command.Parameters.AddWithValue("@Contacts", "+380677654321");
-                        command.Parameters.AddWithValue("@CreatedDate", DateTime.Now.ToString("yyyy-MM-dd"));
-                        command.ExecuteNonQuery();
+                        transaction.Commit();
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Критична помилка при створенні БД: {ex.Message}\n\nФайл clinic.db буде видалено.", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (File.Exists(_dbFileName))
-                {
-                    File.Delete(_dbFileName);
-                }
+                MessageBox.Show($"Критична помилка при створенні БД: {ex.Message}\n\nФайл буде видалено.",
+                                "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if (File.Exists(_dbFileName)) File.Delete(_dbFileName);
             }
         }
 
+        private static void CreateTables(SQLiteConnection connection)
+        {
+            ExecuteSql(connection, @"
+                CREATE TABLE Roles (
+                    RoleID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    RoleName TEXT NOT NULL UNIQUE
+                );");
+
+            ExecuteSql(connection, @"
+                CREATE TABLE Users (
+                    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    RoleID INTEGER NOT NULL,
+                    FullName TEXT NOT NULL,
+                    Username TEXT NOT NULL UNIQUE,
+                    PasswordHash TEXT NOT NULL,
+                    IsActive INTEGER DEFAULT 1,
+                    FOREIGN KEY (RoleID) REFERENCES Roles(RoleID)
+                );");
+
+            ExecuteSql(connection, @"
+                CREATE TABLE Patients (
+                    PatientID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    FullName TEXT NOT NULL,
+                    DateOfBirth TEXT NOT NULL,
+                    Contacts TEXT NOT NULL,
+                    CreatedDate TEXT NOT NULL
+                );");
+        }
+
+        private static void SeedDefaultData(SQLiteConnection connection)
+        {
+            string[] roles = { "Головний Лікар", "Лікар", "Адміністратор" };
+            foreach (string role in roles)
+            {
+                ExecuteSql(connection, "INSERT INTO Roles (RoleName) VALUES (@name)", new[] {
+                    new SQLiteParameter("@name", role)
+                });
+            }
+
+            string adminHash = PasswordHelper.ComputeHash("admin");
+            string sqlAdmin = @"
+                INSERT INTO Users (RoleID, FullName, Username, PasswordHash) 
+                VALUES (
+                    (SELECT RoleID FROM Roles WHERE RoleName = 'Головний Лікар'), 
+                    'Нижегольцев Владислав Іванович', 'admin', @hash
+                );";
+            ExecuteSql(connection, sqlAdmin, new[] { new SQLiteParameter("@hash", adminHash) });
+
+            SeedPatient(connection, "Пацієнт 1", "1980-05-15", "+380501234567");
+            SeedPatient(connection, "Пацієнт 2", "1992-11-30", "+380677654321");
+        }
+
+        private static void SeedPatient(SQLiteConnection connection, string name, string dob, string phone)
+        {
+            string sql = "INSERT INTO Patients (FullName, DateOfBirth, Contacts, CreatedDate) VALUES (@name, @dob, @phone, @date)";
+            ExecuteSql(connection, sql, new[] {
+                new SQLiteParameter("@name", name),
+                new SQLiteParameter("@dob", dob),
+                new SQLiteParameter("@phone", phone),
+                new SQLiteParameter("@date", DateTime.Now.ToString("yyyy-MM-dd"))
+            });
+        }
+        private static void ExecuteSql(SQLiteConnection connection, string sql, SQLiteParameter[] parameters = null) // - лишние дублирование
+        {
+            using (var command = new SQLiteCommand(sql, connection))
+            {
+                if (parameters != null)
+                {
+                    command.Parameters.AddRange(parameters);
+                }
+                command.ExecuteNonQuery();
+            }
+        }
 
         public static DataTable SearchPatients(string query)
         {

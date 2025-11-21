@@ -30,8 +30,6 @@ namespace program
             PatientsDataGridView.AllowUserToAddRows = false;
             PatientsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // TODO: настроить кнопки под роль
-
             if (_currentUser.RoleName == "Лікар")
             {
                 NewPatientButton.Visible = false;
@@ -57,7 +55,5 @@ namespace program
         {
             MessageBox.Show("Тут будет открыта форма 'Новий пацієнт'");
         }
-
-
     }
 }
