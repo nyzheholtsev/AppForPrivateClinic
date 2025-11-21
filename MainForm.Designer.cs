@@ -42,6 +42,7 @@
             StatisticsToolStripMenuItem = new ToolStripMenuItem();
             MainStatusStrip = new StatusStrip();
             UserStatusLabel = new ToolStripStatusLabel();
+            FileLangChangeToolStripMenuItem = new ToolStripMenuItem();
             MainMenuStrip.SuspendLayout();
             MainStatusStrip.SuspendLayout();
             SuspendLayout();
@@ -61,7 +62,7 @@
             // FileToolStripMenuItem
             // 
             FileToolStripMenuItem.BackColor = Color.Transparent;
-            FileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { FileExitToolStripMenuItem });
+            FileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { FileLangChangeToolStripMenuItem, FileExitToolStripMenuItem });
             FileToolStripMenuItem.Font = new Font("Palatino Linotype", 10.2F);
             FileToolStripMenuItem.ForeColor = Color.Wheat;
             FileToolStripMenuItem.Name = "FileToolStripMenuItem";
@@ -72,7 +73,7 @@
             // 
             FileExitToolStripMenuItem.BackColor = Color.Gray;
             FileExitToolStripMenuItem.Name = "FileExitToolStripMenuItem";
-            FileExitToolStripMenuItem.Size = new Size(121, 28);
+            FileExitToolStripMenuItem.Size = new Size(224, 28);
             FileExitToolStripMenuItem.Text = "exit";
             // 
             // RegistrarToolStripMenuItem
@@ -88,21 +89,21 @@
             // 
             PatientSearchToolStripMenuItem.BackColor = Color.Gray;
             PatientSearchToolStripMenuItem.Name = "PatientSearchToolStripMenuItem";
-            PatientSearchToolStripMenuItem.Size = new Size(199, 28);
+            PatientSearchToolStripMenuItem.Size = new Size(224, 28);
             PatientSearchToolStripMenuItem.Text = "PatientSearch";
             // 
             // PatientNewToolStripMenuItem
             // 
             PatientNewToolStripMenuItem.BackColor = Color.Gray;
             PatientNewToolStripMenuItem.Name = "PatientNewToolStripMenuItem";
-            PatientNewToolStripMenuItem.Size = new Size(199, 28);
+            PatientNewToolStripMenuItem.Size = new Size(224, 28);
             PatientNewToolStripMenuItem.Text = "PatientNew";
             // 
             // ScheduleToolStripMenuItem
             // 
             ScheduleToolStripMenuItem.BackColor = Color.Gray;
             ScheduleToolStripMenuItem.Name = "ScheduleToolStripMenuItem";
-            ScheduleToolStripMenuItem.Size = new Size(199, 28);
+            ScheduleToolStripMenuItem.Size = new Size(224, 28);
             ScheduleToolStripMenuItem.Text = "Schedule";
             // 
             // DoctorToolStripMenuItem
@@ -164,6 +165,14 @@
             UserStatusLabel.Size = new Size(160, 23);
             UserStatusLabel.Text = "toolStripStatusLabel";
             // 
+            // FileLangChangeToolStripMenuItem
+            // 
+            FileLangChangeToolStripMenuItem.BackColor = Color.Gray;
+            FileLangChangeToolStripMenuItem.Name = "FileLangChangeToolStripMenuItem";
+            FileLangChangeToolStripMenuItem.Size = new Size(224, 28);
+            FileLangChangeToolStripMenuItem.Text = "lang change";
+            FileLangChangeToolStripMenuItem.Click += FileLangChangeToolStripMenuItem_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -198,5 +207,6 @@
         private ToolStripMenuItem MyQueueToolStripMenuItem;
         private ToolStripMenuItem ManageUsersToolStripMenuItem;
         private ToolStripMenuItem StatisticsToolStripMenuItem;
+        private ToolStripMenuItem FileLangChangeToolStripMenuItem;
     }
 }

@@ -37,42 +37,53 @@
             // 
             // SearchButton
             // 
-            SearchButton.Location = new Point(594, 55);
+            SearchButton.FlatStyle = FlatStyle.Flat;
+            SearchButton.Font = new Font("Palatino Linotype", 10.2F);
+            SearchButton.ForeColor = Color.Wheat;
+            SearchButton.Location = new Point(539, 54);
             SearchButton.Name = "SearchButton";
-            SearchButton.Size = new Size(94, 29);
+            SearchButton.Size = new Size(94, 37);
             SearchButton.TabIndex = 0;
             SearchButton.Text = "SearchButton";
             SearchButton.UseVisualStyleBackColor = true;
             // 
             // NewPatientButton
             // 
-            NewPatientButton.Location = new Point(694, 55);
+            NewPatientButton.FlatStyle = FlatStyle.Flat;
+            NewPatientButton.Font = new Font("Palatino Linotype", 10.2F);
+            NewPatientButton.ForeColor = Color.Wheat;
+            NewPatientButton.Location = new Point(639, 54);
             NewPatientButton.Name = "NewPatientButton";
-            NewPatientButton.Size = new Size(94, 29);
+            NewPatientButton.Size = new Size(149, 37);
             NewPatientButton.TabIndex = 1;
             NewPatientButton.Text = "NewPatientButton";
             NewPatientButton.UseVisualStyleBackColor = true;
+            NewPatientButton.Click += NewPatientButton_Click;
             // 
             // SearchTextBox
             // 
-            SearchTextBox.Location = new Point(12, 56);
+            SearchTextBox.BackColor = Color.Wheat;
+            SearchTextBox.Font = new Font("Segoe UI", 10.2F);
+            SearchTextBox.Location = new Point(12, 54);
             SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.Size = new Size(576, 27);
+            SearchTextBox.Size = new Size(521, 30);
             SearchTextBox.TabIndex = 2;
             // 
             // PatientsDataGridView
             // 
+            PatientsDataGridView.BackgroundColor = Color.Gray;
             PatientsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             PatientsDataGridView.Location = new Point(12, 104);
             PatientsDataGridView.Name = "PatientsDataGridView";
             PatientsDataGridView.RowHeadersWidth = 51;
-            PatientsDataGridView.Size = new Size(776, 267);
+            PatientsDataGridView.Size = new Size(776, 284);
             PatientsDataGridView.TabIndex = 3;
             // 
             // PatientSearchForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Gray;
             ClientSize = new Size(800, 400);
             Controls.Add(PatientsDataGridView);
             Controls.Add(SearchTextBox);

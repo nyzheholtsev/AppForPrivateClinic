@@ -1,4 +1,5 @@
 ﻿using program.dbClass;
+using program.Localization;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -20,12 +21,12 @@ namespace program
             this.Load += new System.EventHandler(this.MainForm_Load);
         }
 
-
         private void MainForm_Load(object sender, EventArgs e)
         {
 
             MainMenuStrip.Renderer = new CustomMenuRenderer();
-
+            
+            LocalizationManager.LoadLanguage(_currentLang);
             ApplyLocalization();
 
             SetupUiForRole();
@@ -72,6 +73,7 @@ namespace program
 
             FileToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File");
             FileExitToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_Exit");
+            FileLangChangeToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_LangChange");
 
             RegistrarToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar");
             PatientSearchToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Search");
@@ -208,6 +210,21 @@ namespace program
             public override Color ImageMarginGradientEnd
             {
                 get { return _defaultGray; }
+            }
+        }
+
+        private void FileLangChangeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _currentLang = (_currentLang == "ukr") ? "eng" : "ukr";
+            LocalizationManager.LoadLanguage(_currentLang);
+            ApplyLocalization();
+
+            foreach (Control c in this.Controls) // пробегаемся
+            {
+                if (c is Localizable localizableForm)
+                {
+                    localizableForm.UpdateLocalization();
+                }
             }
         }
     }

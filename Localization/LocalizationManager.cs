@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 
-namespace program
+namespace program.Localization
 {
     public static class LocalizationManager
     {

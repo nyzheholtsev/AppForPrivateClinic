@@ -1,4 +1,5 @@
 using program.dbClass;
+using program.Localization;
 using System;
 using System.Windows.Forms;
 

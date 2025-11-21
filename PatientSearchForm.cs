@@ -1,10 +1,11 @@
 ﻿using program.dbClass;
+using program.Localization;
 using System;
 using System.Windows.Forms;
 
 namespace program
 {
-    public partial class PatientSearchForm : Form
+    public partial class PatientSearchForm : Form, Localizable
     {
         private UserModel _currentUser;
 
@@ -14,8 +15,14 @@ namespace program
             _currentUser = user;
 
             this.FormBorderStyle = FormBorderStyle.None; // - края
+            UpdateLocalization();
         }
 
+        public void UpdateLocalization()
+        {
+            SearchButton.Text = LocalizationManager.GetString("PatientSearchForm_SearchButton");
+            NewPatientButton.Text = LocalizationManager.GetString("PatientSearchForm_NewButton");
+        }
         private void PatientSearchForm_Load(object sender, EventArgs e)
         {
             PatientsDataGridView.ReadOnly = true;
@@ -50,5 +57,7 @@ namespace program
         {
             MessageBox.Show("Тут будет открыта форма 'Новий пацієнт'");
         }
+
+
     }
 }
