@@ -1,0 +1,25 @@
+﻿{
+	"LoginForm_Title": "Вхід до системи",
+	"LoginForm_UsernameLabel": "Логін:",
+	"LoginForm_PasswordLabel": "Пароль:",
+	"LoginForm_LoginButton": "Увійти",
+	"LoginForm_LangToggleButton": "EN",
+	"LoginForm_ErrorEmpty": "Логін та пароль не можуть бути порожніми.",
+	"LoginForm_ErrorInvalid": "Невірний логін або пароль!",
+
+	"MainForm_Title": "Система Клініки (Режим: {0})",
+	"MainForm_UserStatus": "Користувач: {0}       Режим: {1}",
+	"MainForm_LangToggleButton": "EN",
+
+	"MainForm_Menu_File": "Файл",
+	"MainForm_Menu_File_Exit": "Вихід",
+	"MainForm_Menu_Registrar": "Реєстратура",
+	"MainForm_Menu_Registrar_Search": "Пошук пацієнта",
+	"MainForm_Menu_Registrar_New": "Новий пацієнт",
+	"MainForm_Menu_Registrar_Schedule": "Календар/Розклад",
+	"MainForm_Menu_Doctor": "Прийом",
+	"MainForm_Menu_Doctor_Queue": "Моя черга",
+	"MainForm_Menu_Admin": "Адміністрування",
+	"MainForm_Menu_Admin_Users": "Керування персоналом",
+	"MainForm_Menu_Admin_Stats": "Статистика"
+}

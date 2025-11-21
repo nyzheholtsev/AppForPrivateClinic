@@ -1,0 +1,25 @@
+{
+  "LoginForm_Title": "System Login",
+  "LoginForm_UsernameLabel": "Username:",
+  "LoginForm_PasswordLabel": "Password:",
+  "LoginForm_LoginButton": "Login",
+  "LoginForm_LangToggleButton": "UKR",
+  "LoginForm_ErrorEmpty": "Username and password cannot be empty.",
+  "LoginForm_ErrorInvalid": "Invalid username or password!",
+
+  "MainForm_Title": "Clinic System (Mode: {0})",
+  "MainForm_UserStatus": "User: {0}       Mode: {1}",
+  "MainForm_LangToggleButton": "UKR",
+
+  "MainForm_Menu_File": "File",
+  "MainForm_Menu_File_Exit": "Exit",
+  "MainForm_Menu_Registrar": "Registrar",
+  "MainForm_Menu_Registrar_Search": "Search Patient",
+  "MainForm_Menu_Registrar_New": "New Patient",
+  "MainForm_Menu_Registrar_Schedule": "Calendar/Schedule",
+  "MainForm_Menu_Doctor": "Reception",
+  "MainForm_Menu_Doctor_Queue": "My Queue",
+  "MainForm_Menu_Admin": "Administration",
+  "MainForm_Menu_Admin_Users": "Manage Staff",
+  "MainForm_Menu_Admin_Stats": "Statistics"
+}
