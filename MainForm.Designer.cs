@@ -48,7 +48,7 @@
             // 
             // MainMenuStrip
             // 
-            MainMenuStrip.BackColor = Color.Gray;
+            MainMenuStrip.BackColor = Color.DimGray;
             MainMenuStrip.ImageScalingSize = new Size(20, 20);
             MainMenuStrip.Items.AddRange(new ToolStripItem[] { FileToolStripMenuItem, RegistrarToolStripMenuItem, DoctorToolStripMenuItem, AdminToolStripMenuItem });
             MainMenuStrip.Location = new Point(0, 0);
@@ -172,10 +172,8 @@
             ClientSize = new Size(800, 450);
             Controls.Add(MainStatusStrip);
             Controls.Add(MainMenuStrip);
-            IsMdiContainer = true;
             Name = "MainForm";
             Text = "MainForm";
-            Load += MainForm_Load_1;
             MainMenuStrip.ResumeLayout(false);
             MainMenuStrip.PerformLayout();
             MainStatusStrip.ResumeLayout(false);
