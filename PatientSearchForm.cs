@@ -50,10 +50,5 @@ namespace program
         {
             MessageBox.Show("Тут будет открыта форма 'Новий пацієнт'");
         }
-
-        private void NewPatientButton_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -52,7 +52,6 @@
             NewPatientButton.TabIndex = 1;
             NewPatientButton.Text = "NewPatientButton";
             NewPatientButton.UseVisualStyleBackColor = true;
-            NewPatientButton.Click += NewPatientButton_Click_1;
             // 
             // SearchTextBox
             // 
