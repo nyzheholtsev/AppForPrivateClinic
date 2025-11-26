@@ -36,9 +36,15 @@
             SearchTextBox = new TextBox();
             PatientsDataGridView = new DataGridView();
             patientModelBindingSource = new BindingSource(components);
-            PathientFullNameColum = new DataGridViewTextBoxColumn();
-            PathientDateOfBirthColum = new DataGridViewTextBoxColumn();
+            PathientFullNameColumn = new DataGridViewTextBoxColumn();
+            PathientDateOfBirthColumn = new DataGridViewTextBoxColumn();
             PathientContactColumn = new DataGridViewTextBoxColumn();
+            patientIDDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            fullNameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            dateOfBirthDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            contactsDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            createdDateDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            ageDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)PatientsDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)patientModelBindingSource).BeginInit();
             SuspendLayout();
@@ -54,6 +60,7 @@
             SearchButton.TabIndex = 0;
             SearchButton.Text = "SearchButton";
             SearchButton.UseVisualStyleBackColor = true;
+            SearchButton.Click += SearchButton_Click;
             // 
             // SearchTextBox
             // 
@@ -73,7 +80,7 @@
             PatientsDataGridView.AutoGenerateColumns = false;
             PatientsDataGridView.BackgroundColor = Color.Gray;
             PatientsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            PatientsDataGridView.Columns.AddRange(new DataGridViewColumn[] { PathientFullNameColum, PathientDateOfBirthColum, PathientContactColumn });
+            PatientsDataGridView.Columns.AddRange(new DataGridViewColumn[] { PathientFullNameColumn, PathientDateOfBirthColumn, PathientContactColumn, patientIDDataGridViewTextBoxColumn, fullNameDataGridViewTextBoxColumn, dateOfBirthDataGridViewTextBoxColumn, contactsDataGridViewTextBoxColumn, createdDateDataGridViewTextBoxColumn, ageDataGridViewTextBoxColumn });
             PatientsDataGridView.DataSource = patientModelBindingSource;
             PatientsDataGridView.GridColor = Color.Gray;
             PatientsDataGridView.Location = new Point(12, 104);
@@ -88,35 +95,37 @@
             // 
             patientModelBindingSource.DataSource = typeof(dbClass.PatientModel);
             // 
-            // PathientFullNameColum
+            // PathientFullNameColumn
             // 
-            PathientFullNameColum.DataPropertyName = "FullName";
+            PathientFullNameColumn.DataPropertyName = "FullName";
             dataGridViewCellStyle1.BackColor = Color.Gray;
             dataGridViewCellStyle1.Font = new Font("Palatino Linotype", 9.2F);
             dataGridViewCellStyle1.ForeColor = Color.Wheat;
             dataGridViewCellStyle1.SelectionBackColor = Color.Gray;
             dataGridViewCellStyle1.SelectionForeColor = Color.Wheat;
-            PathientFullNameColum.DefaultCellStyle = dataGridViewCellStyle1;
-            PathientFullNameColum.HeaderText = "PathientFullName";
-            PathientFullNameColum.MinimumWidth = 6;
-            PathientFullNameColum.Name = "PathientFullNameColum";
-            PathientFullNameColum.ReadOnly = true;
-            PathientFullNameColum.Width = 410;
+            PathientFullNameColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            PathientFullNameColumn.HeaderText = "PathientFullName";
+            PathientFullNameColumn.MinimumWidth = 6;
+            PathientFullNameColumn.Name = "PathientFullNameColumn";
+            PathientFullNameColumn.ReadOnly = true;
+            PathientFullNameColumn.Resizable = DataGridViewTriState.False;
+            PathientFullNameColumn.Width = 410;
             // 
-            // PathientDateOfBirthColum
+            // PathientDateOfBirthColumn
             // 
-            PathientDateOfBirthColum.DataPropertyName = "DateOfBirth";
+            PathientDateOfBirthColumn.DataPropertyName = "DateOfBirth";
             dataGridViewCellStyle2.BackColor = Color.Gray;
             dataGridViewCellStyle2.Font = new Font("Palatino Linotype", 9.2F);
             dataGridViewCellStyle2.ForeColor = Color.Wheat;
             dataGridViewCellStyle2.SelectionBackColor = Color.Gray;
             dataGridViewCellStyle2.SelectionForeColor = Color.Wheat;
-            PathientDateOfBirthColum.DefaultCellStyle = dataGridViewCellStyle2;
-            PathientDateOfBirthColum.HeaderText = "PathientDateOfBirth";
-            PathientDateOfBirthColum.MinimumWidth = 6;
-            PathientDateOfBirthColum.Name = "PathientDateOfBirthColum";
-            PathientDateOfBirthColum.ReadOnly = true;
-            PathientDateOfBirthColum.Width = 125;
+            PathientDateOfBirthColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            PathientDateOfBirthColumn.HeaderText = "PathientDateOfBirth";
+            PathientDateOfBirthColumn.MinimumWidth = 6;
+            PathientDateOfBirthColumn.Name = "PathientDateOfBirthColumn";
+            PathientDateOfBirthColumn.ReadOnly = true;
+            PathientDateOfBirthColumn.Resizable = DataGridViewTriState.False;
+            PathientDateOfBirthColumn.Width = 125;
             // 
             // PathientContactColumn
             // 
@@ -124,14 +133,75 @@
             dataGridViewCellStyle3.BackColor = Color.Gray;
             dataGridViewCellStyle3.Font = new Font("Palatino Linotype", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             dataGridViewCellStyle3.ForeColor = Color.Wheat;
-            dataGridViewCellStyle3.SelectionBackColor = Color.DarkGray;
+            dataGridViewCellStyle3.SelectionBackColor = Color.Gray;
             dataGridViewCellStyle3.SelectionForeColor = Color.Wheat;
             PathientContactColumn.DefaultCellStyle = dataGridViewCellStyle3;
             PathientContactColumn.HeaderText = "PathientContactColumn";
             PathientContactColumn.MinimumWidth = 6;
             PathientContactColumn.Name = "PathientContactColumn";
             PathientContactColumn.ReadOnly = true;
+            PathientContactColumn.Resizable = DataGridViewTriState.False;
             PathientContactColumn.Width = 236;
+            // 
+            // patientIDDataGridViewTextBoxColumn
+            // 
+            patientIDDataGridViewTextBoxColumn.DataPropertyName = "PatientID";
+            patientIDDataGridViewTextBoxColumn.HeaderText = "PatientID";
+            patientIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            patientIDDataGridViewTextBoxColumn.Name = "patientIDDataGridViewTextBoxColumn";
+            patientIDDataGridViewTextBoxColumn.ReadOnly = true;
+            patientIDDataGridViewTextBoxColumn.Visible = false;
+            patientIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fullNameDataGridViewTextBoxColumn
+            // 
+            fullNameDataGridViewTextBoxColumn.DataPropertyName = "FullName";
+            fullNameDataGridViewTextBoxColumn.HeaderText = "FullName";
+            fullNameDataGridViewTextBoxColumn.MinimumWidth = 6;
+            fullNameDataGridViewTextBoxColumn.Name = "fullNameDataGridViewTextBoxColumn";
+            fullNameDataGridViewTextBoxColumn.ReadOnly = true;
+            fullNameDataGridViewTextBoxColumn.Visible = false;
+            fullNameDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // dateOfBirthDataGridViewTextBoxColumn
+            // 
+            dateOfBirthDataGridViewTextBoxColumn.DataPropertyName = "DateOfBirth";
+            dateOfBirthDataGridViewTextBoxColumn.HeaderText = "DateOfBirth";
+            dateOfBirthDataGridViewTextBoxColumn.MinimumWidth = 6;
+            dateOfBirthDataGridViewTextBoxColumn.Name = "dateOfBirthDataGridViewTextBoxColumn";
+            dateOfBirthDataGridViewTextBoxColumn.ReadOnly = true;
+            dateOfBirthDataGridViewTextBoxColumn.Visible = false;
+            dateOfBirthDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // contactsDataGridViewTextBoxColumn
+            // 
+            contactsDataGridViewTextBoxColumn.DataPropertyName = "Contacts";
+            contactsDataGridViewTextBoxColumn.HeaderText = "Contacts";
+            contactsDataGridViewTextBoxColumn.MinimumWidth = 6;
+            contactsDataGridViewTextBoxColumn.Name = "contactsDataGridViewTextBoxColumn";
+            contactsDataGridViewTextBoxColumn.ReadOnly = true;
+            contactsDataGridViewTextBoxColumn.Visible = false;
+            contactsDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // createdDateDataGridViewTextBoxColumn
+            // 
+            createdDateDataGridViewTextBoxColumn.DataPropertyName = "CreatedDate";
+            createdDateDataGridViewTextBoxColumn.HeaderText = "CreatedDate";
+            createdDateDataGridViewTextBoxColumn.MinimumWidth = 6;
+            createdDateDataGridViewTextBoxColumn.Name = "createdDateDataGridViewTextBoxColumn";
+            createdDateDataGridViewTextBoxColumn.ReadOnly = true;
+            createdDateDataGridViewTextBoxColumn.Visible = false;
+            createdDateDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // ageDataGridViewTextBoxColumn
+            // 
+            ageDataGridViewTextBoxColumn.DataPropertyName = "Age";
+            ageDataGridViewTextBoxColumn.HeaderText = "Age";
+            ageDataGridViewTextBoxColumn.MinimumWidth = 6;
+            ageDataGridViewTextBoxColumn.Name = "ageDataGridViewTextBoxColumn";
+            ageDataGridViewTextBoxColumn.ReadOnly = true;
+            ageDataGridViewTextBoxColumn.Visible = false;
+            ageDataGridViewTextBoxColumn.Width = 125;
             // 
             // PatientSearchForm
             // 
@@ -157,8 +227,14 @@
         private TextBox SearchTextBox;
         private DataGridView PatientsDataGridView;
         private BindingSource patientModelBindingSource;
-        private DataGridViewTextBoxColumn PathientFullNameColum;
-        private DataGridViewTextBoxColumn PathientDateOfBirthColum;
+        private DataGridViewTextBoxColumn PathientFullNameColumn;
+        private DataGridViewTextBoxColumn PathientDateOfBirthColumn;
         private DataGridViewTextBoxColumn PathientContactColumn;
+        private DataGridViewTextBoxColumn patientIDDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn fullNameDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn dateOfBirthDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn contactsDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn createdDateDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn ageDataGridViewTextBoxColumn;
     }
 }

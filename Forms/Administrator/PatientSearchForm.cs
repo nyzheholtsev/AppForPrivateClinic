@@ -22,13 +22,25 @@ namespace program
         public void UpdateLocalization()
         {
             SearchButton.Text = LocalizationManager.GetString("PatientSearchForm_SearchButton");
+            PathientFullNameColumn.HeaderText = LocalizationManager.GetString("PatientSearchForm_Column_FullName");
+            PathientDateOfBirthColumn.HeaderText = LocalizationManager.GetString("PatientSearchForm_Column_DateOfBirth");
+            PathientContactColumn.HeaderText = LocalizationManager.GetString("PatientSearchForm_Column_Contact");
         }
         private void PatientSearchForm_Load(object sender, EventArgs e)
         {
             PatientsDataGridView.ReadOnly = true;
             PatientsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             PatientsDataGridView.AllowUserToAddRows = false;
+            PatientsDataGridView.AutoGenerateColumns = false;
             PatientsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            PatientsDataGridView.EnableHeadersVisualStyles = false;
+            PatientsDataGridView.ColumnHeadersDefaultCellStyle.BackColor = Color.DimGray;
+            PatientsDataGridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.Wheat;
+            PatientsDataGridView.ColumnHeadersDefaultCellStyle.Font = new Font("Palatino Linotype", 10, FontStyle.Bold);
+            PatientsDataGridView.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.DimGray;
+
+            PerformSearch();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -36,19 +48,13 @@ namespace program
             string query = SearchTextBox.Text;
 
             PatientsDataGridView.DataSource = DatabaseHelper.SearchPatients(query);
-
-            if (PatientsDataGridView.Columns.Count > 0)
-            {
-                PatientsDataGridView.Columns["PatientID"].HeaderText = "ID";
-                PatientsDataGridView.Columns["FullName"].HeaderText = "ПІБ";
-                PatientsDataGridView.Columns["DateOfBirth"].HeaderText = "Дата нар.";
-                PatientsDataGridView.Columns["Contacts"].HeaderText = "Контакти";
-            }
+            PerformSearch();
         }
 
-        private void NewPatientButton_Click(object sender, EventArgs e)
+        private void PerformSearch()
         {
-            MessageBox.Show("Тут будет открыта форма 'Новий пацієнт'");
+            string query = SearchTextBox.Text;
+            PatientsDataGridView.DataSource = DatabaseHelper.SearchPatients(query);
         }
 
     }

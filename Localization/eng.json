@@ -30,5 +30,7 @@
 
   // ============================================================
   "PatientSearchForm_SearchButton": "Search",
-  "PatientSearchForm_NewButton": "New Patient"
+  "PatientSearchForm_Column_FullName": "Full name",
+  "PatientSearchForm_Column_DateOfBirth": "Date of birth",
+  "PatientSearchForm_Column_Contact": "Contact"
 }

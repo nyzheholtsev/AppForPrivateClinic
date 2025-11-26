@@ -30,5 +30,7 @@
 
 	// ============================================================
 	"PatientSearchForm_SearchButton": "Пошук",
-	"PatientSearchForm_NewButton": "Новий пацієнт"
+	"PatientSearchForm_Column_FullName": "Повне ім'я",
+	"PatientSearchForm_Column_DateOfBirth": "Дата народження",
+	"PatientSearchForm_Column_Contact": "Контакти"
 }
