@@ -106,7 +106,7 @@ namespace program.dbClass
                 FOREIGN KEY (AppointmentID) REFERENCES Appointments(AppointmentID)
             );");
         }
-
+        // =================================тестові=================================
         private static void SeedDefaultData(SQLiteConnection connection)
         {
             string[] roles = { "Головний Лікар", "Лікар", "Адміністратор" };
@@ -147,17 +147,16 @@ namespace program.dbClass
             SeedPatient(connection, "Іванов Іван", "1992-11-30", "+380677654321");
         }
 
-
         private static void SeedPatient(SQLiteConnection connection, string name, string dob, string phone)
         {
             string sql = "INSERT INTO Patients (FullName, DateOfBirth, Contacts, CreatedDate) VALUES (@name, @dob, @phone, @date)";
             ExecuteSql(connection, sql, new[] {
-        new SQLiteParameter("@name", name),
-        new SQLiteParameter("@dob", dob),
-        new SQLiteParameter("@phone", phone),
-        new SQLiteParameter("@date", DateTime.Now.ToString("yyyy-MM-dd"))
-    });
-        }
+                new SQLiteParameter("@name", name),
+                new SQLiteParameter("@dob", dob),
+                new SQLiteParameter("@phone", phone),
+                new SQLiteParameter("@date", DateTime.Now.ToString("yyyy-MM-dd"))
+            });
+            }
 
         private static void SeedScheduleForDoctor(SQLiteConnection connection, int doctorId)
         {
@@ -193,59 +192,185 @@ namespace program.dbClass
             }
         }
 
-        public static DataTable SearchPatients(string query)
+        // =================================Patient=================================
+        public static List<PatientModel> SearchPatients(string query)
         {
-            var dt = new DataTable();
-            if (!File.Exists(_dbFileName)) return dt;
+            var list = new List<PatientModel>();
+            if (!File.Exists(_dbFileName)) return list;
 
-            string sql = @"
-            SELECT PatientID, FullName, DateOfBirth, Contacts 
-            FROM Patients
-            WHERE FullName LIKE @query
-            LIMIT 50;";
+            string sql = @"SELECT * FROM Patients WHERE FullName LIKE @query LIMIT 50;";
 
             try
             {
                 using (var connection = new SQLiteConnection(_connectionString))
                 {
                     connection.Open();
-                    using (var adapter = new SQLiteDataAdapter(sql, connection))
+                    using (var command = new SQLiteCommand(sql, connection))
                     {
-                        adapter.SelectCommand.Parameters.AddWithValue("@query", $"%{query}%");
-                        adapter.Fill(dt);
+                        command.Parameters.AddWithValue("@query", $"%{query}%");
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                list.Add(new PatientModel
+                                {
+                                    PatientID = Convert.ToInt32(reader["PatientID"]),
+                                    FullName = reader["FullName"].ToString(),
+                                    DateOfBirth = DateTime.TryParse(reader["DateOfBirth"].ToString(), out DateTime dt) ? dt : DateTime.MinValue,
+                                    Contacts = reader["Contacts"].ToString(),
+                                    CreatedDate = reader["CreatedDate"].ToString()
+                                });
+                            }
+                        }
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) { MessageBox.Show($"Помилка пошуку: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            return list;
+        }
+
+        public static void AddPatient(string fullName, DateTime dateOfBirth, string contacts)
+        {
+            string sql = "INSERT INTO Patients (FullName, DateOfBirth, Contacts, CreatedDate) VALUES (@name, @dob, @phone, @date)";
+            try
             {
-                MessageBox.Show($"Помилка при пошуку пацієнтів: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                using (var connection = new SQLiteConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@name", fullName);
+                        command.Parameters.AddWithValue("@dob", dateOfBirth.ToString("yyyy-MM-dd"));
+                        command.Parameters.AddWithValue("@phone", contacts);
+                        command.Parameters.AddWithValue("@date", DateTime.Now.ToString("yyyy-MM-dd"));
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
-            return dt;
+            catch (Exception ex) { MessageBox.Show($"Помилка додавання: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
 
+        // =================================Appointments=================================
+        public static List<AppointmentModel> GetAppointments(int doctorId, DateTime date)
+        {
+            var list = new List<AppointmentModel>();
+            string sql = @"
+                SELECT A.*, P.FullName AS PatientName, U.FullName AS DoctorName
+                FROM Appointments A
+                JOIN Patients P ON A.PatientID = P.PatientID
+                JOIN Users U ON A.UserID = U.UserID
+                WHERE A.UserID = @docId AND A.AppointmentDate = @date
+                ORDER BY A.AppointmentTime";
+
+            try
+            {
+                using (var connection = new SQLiteConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@docId", doctorId);
+                        command.Parameters.AddWithValue("@date", date.ToString("yyyy-MM-dd"));
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                list.Add(new AppointmentModel
+                                {
+                                    AppointmentID = Convert.ToInt32(reader["AppointmentID"]),
+                                    PatientID = Convert.ToInt32(reader["PatientID"]),
+                                    PatientName = reader["PatientName"].ToString(),
+                                    UserID = Convert.ToInt32(reader["UserID"]),
+                                    DoctorName = reader["DoctorName"].ToString(),
+                                    AppointmentDate = reader["AppointmentDate"].ToString(),
+                                    AppointmentTime = reader["AppointmentTime"].ToString(),
+                                    Status = reader["Status"].ToString()
+                                });
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show($"Помилка завантаження записів: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            return list;
+        }
+
+        public static void CreateAppointment(int patientId, int doctorId, DateTime date, string time)
+        {
+            string sql = @"INSERT INTO Appointments (PatientID, UserID, AppointmentDate, AppointmentTime, Status) 
+                           VALUES (@pid, @uid, @date, @time, 'Scheduled')";
+            try
+            {
+                using (var connection = new SQLiteConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@pid", patientId);
+                        command.Parameters.AddWithValue("@uid", doctorId);
+                        command.Parameters.AddWithValue("@date", date.ToString("yyyy-MM-dd"));
+                        command.Parameters.AddWithValue("@time", time);
+                        command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show($"Помилка створення запису: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
+
+
+        // =================================Schedules=================================
+        public static DoctorScheduleModel GetDoctorSchedule(int doctorId, DateTime date)
+        {
+            string sql = "SELECT * FROM DoctorSchedules WHERE UserID = @uid AND WorkDate = @date";
+            try
+            {
+                using (var connection = new SQLiteConnection(_connectionString))
+                {
+                    connection.Open();
+                    using (var command = new SQLiteCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@uid", doctorId);
+                        command.Parameters.AddWithValue("@date", date.ToString("yyyy-MM-dd"));
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                return new DoctorScheduleModel
+                                {
+                                    ScheduleID = Convert.ToInt32(reader["ScheduleID"]),
+                                    UserID = Convert.ToInt32(reader["UserID"]),
+                                    WorkDate = reader["WorkDate"].ToString(),
+                                    StartTime = reader["StartTime"].ToString(),
+                                    EndTime = reader["EndTime"].ToString(),
+                                    LunchStart = reader["LunchStart"].ToString(),
+                                    LunchEnd = reader["LunchEnd"].ToString()
+                                };
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex) { MessageBox.Show($"Помилка розкладу: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            return null;
+        }
+
+
+        // =================================Users=================================
         public static UserModel ValidateUser(string username, string password)
         {
             if (!File.Exists(_dbFileName))
             {
-                MessageBox.Show("Критична помилка: Файл clinic.db не знайдено. База даних не була створена.", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Критична помилка: Файл clinic.db не знайдено.", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
 
             string passwordHash = PasswordHelper.ComputeHash(password);
             string sql = @"
-            SELECT 
-                u.UserID, 
-                u.FullName,
-                u.Specialization,
-                r.RoleName 
-            FROM Users u
-            JOIN Roles r ON u.RoleID = r.RoleID
-            WHERE 
-                u.Username = @user AND 
-                u.PasswordHash = @pass AND 
-                u.IsActive = 1;
-            ";
+            SELECT u.UserID, u.FullName, u.Specialization, r.RoleName 
+            FROM Users u JOIN Roles r ON u.RoleID = r.RoleID
+            WHERE u.Username = @user AND u.PasswordHash = @pass AND u.IsActive = 1;";
 
             try
             {
@@ -256,7 +381,6 @@ namespace program.dbClass
                     {
                         command.Parameters.AddWithValue("@user", username);
                         command.Parameters.AddWithValue("@pass", passwordHash);
-
                         using (var reader = command.ExecuteReader())
                         {
                             if (reader.Read())
@@ -269,19 +393,12 @@ namespace program.dbClass
                                     RoleName = reader["RoleName"].ToString()
                                 };
                             }
-                            else
-                            {
-                                return null;
-                            }
                         }
                     }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Помилка при вході: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
+            catch (Exception ex) { MessageBox.Show($"Помилка при вході: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            return null;
         }
     }
 }
