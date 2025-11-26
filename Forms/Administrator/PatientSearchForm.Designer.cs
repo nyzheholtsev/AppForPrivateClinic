@@ -28,11 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             SearchButton = new Button();
-            NewPatientButton = new Button();
             SearchTextBox = new TextBox();
             PatientsDataGridView = new DataGridView();
+            patientModelBindingSource = new BindingSource(components);
+            PathientFullNameColum = new DataGridViewTextBoxColumn();
+            PathientDateOfBirthColum = new DataGridViewTextBoxColumn();
+            PathientContactColumn = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)PatientsDataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)patientModelBindingSource).BeginInit();
             SuspendLayout();
             // 
             // SearchButton
@@ -40,25 +48,12 @@
             SearchButton.FlatStyle = FlatStyle.Flat;
             SearchButton.Font = new Font("Palatino Linotype", 10.2F);
             SearchButton.ForeColor = Color.Wheat;
-            SearchButton.Location = new Point(539, 54);
+            SearchButton.Location = new Point(694, 54);
             SearchButton.Name = "SearchButton";
             SearchButton.Size = new Size(94, 37);
             SearchButton.TabIndex = 0;
             SearchButton.Text = "SearchButton";
             SearchButton.UseVisualStyleBackColor = true;
-            // 
-            // NewPatientButton
-            // 
-            NewPatientButton.FlatStyle = FlatStyle.Flat;
-            NewPatientButton.Font = new Font("Palatino Linotype", 10.2F);
-            NewPatientButton.ForeColor = Color.Wheat;
-            NewPatientButton.Location = new Point(639, 54);
-            NewPatientButton.Name = "NewPatientButton";
-            NewPatientButton.Size = new Size(149, 37);
-            NewPatientButton.TabIndex = 1;
-            NewPatientButton.Text = "NewPatientButton";
-            NewPatientButton.UseVisualStyleBackColor = true;
-            NewPatientButton.Click += NewPatientButton_Click;
             // 
             // SearchTextBox
             // 
@@ -66,18 +61,77 @@
             SearchTextBox.Font = new Font("Segoe UI", 10.2F);
             SearchTextBox.Location = new Point(12, 54);
             SearchTextBox.Name = "SearchTextBox";
-            SearchTextBox.Size = new Size(521, 30);
+            SearchTextBox.Size = new Size(676, 30);
             SearchTextBox.TabIndex = 2;
             // 
             // PatientsDataGridView
             // 
+            PatientsDataGridView.AllowUserToAddRows = false;
+            PatientsDataGridView.AllowUserToDeleteRows = false;
+            PatientsDataGridView.AllowUserToResizeColumns = false;
+            PatientsDataGridView.AllowUserToResizeRows = false;
+            PatientsDataGridView.AutoGenerateColumns = false;
             PatientsDataGridView.BackgroundColor = Color.Gray;
             PatientsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            PatientsDataGridView.Columns.AddRange(new DataGridViewColumn[] { PathientFullNameColum, PathientDateOfBirthColum, PathientContactColumn });
+            PatientsDataGridView.DataSource = patientModelBindingSource;
+            PatientsDataGridView.GridColor = Color.Gray;
             PatientsDataGridView.Location = new Point(12, 104);
             PatientsDataGridView.Name = "PatientsDataGridView";
+            PatientsDataGridView.ReadOnly = true;
+            PatientsDataGridView.RowHeadersVisible = false;
             PatientsDataGridView.RowHeadersWidth = 51;
             PatientsDataGridView.Size = new Size(776, 284);
             PatientsDataGridView.TabIndex = 3;
+            // 
+            // patientModelBindingSource
+            // 
+            patientModelBindingSource.DataSource = typeof(dbClass.PatientModel);
+            // 
+            // PathientFullNameColum
+            // 
+            PathientFullNameColum.DataPropertyName = "FullName";
+            dataGridViewCellStyle1.BackColor = Color.Gray;
+            dataGridViewCellStyle1.Font = new Font("Palatino Linotype", 9.2F);
+            dataGridViewCellStyle1.ForeColor = Color.Wheat;
+            dataGridViewCellStyle1.SelectionBackColor = Color.Gray;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Wheat;
+            PathientFullNameColum.DefaultCellStyle = dataGridViewCellStyle1;
+            PathientFullNameColum.HeaderText = "PathientFullName";
+            PathientFullNameColum.MinimumWidth = 6;
+            PathientFullNameColum.Name = "PathientFullNameColum";
+            PathientFullNameColum.ReadOnly = true;
+            PathientFullNameColum.Width = 410;
+            // 
+            // PathientDateOfBirthColum
+            // 
+            PathientDateOfBirthColum.DataPropertyName = "DateOfBirth";
+            dataGridViewCellStyle2.BackColor = Color.Gray;
+            dataGridViewCellStyle2.Font = new Font("Palatino Linotype", 9.2F);
+            dataGridViewCellStyle2.ForeColor = Color.Wheat;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Gray;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Wheat;
+            PathientDateOfBirthColum.DefaultCellStyle = dataGridViewCellStyle2;
+            PathientDateOfBirthColum.HeaderText = "PathientDateOfBirth";
+            PathientDateOfBirthColum.MinimumWidth = 6;
+            PathientDateOfBirthColum.Name = "PathientDateOfBirthColum";
+            PathientDateOfBirthColum.ReadOnly = true;
+            PathientDateOfBirthColum.Width = 125;
+            // 
+            // PathientContactColumn
+            // 
+            PathientContactColumn.DataPropertyName = "Contacts";
+            dataGridViewCellStyle3.BackColor = Color.Gray;
+            dataGridViewCellStyle3.Font = new Font("Palatino Linotype", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle3.ForeColor = Color.Wheat;
+            dataGridViewCellStyle3.SelectionBackColor = Color.DarkGray;
+            dataGridViewCellStyle3.SelectionForeColor = Color.Wheat;
+            PathientContactColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            PathientContactColumn.HeaderText = "PathientContactColumn";
+            PathientContactColumn.MinimumWidth = 6;
+            PathientContactColumn.Name = "PathientContactColumn";
+            PathientContactColumn.ReadOnly = true;
+            PathientContactColumn.Width = 236;
             // 
             // PatientSearchForm
             // 
@@ -87,12 +141,12 @@
             ClientSize = new Size(800, 400);
             Controls.Add(PatientsDataGridView);
             Controls.Add(SearchTextBox);
-            Controls.Add(NewPatientButton);
             Controls.Add(SearchButton);
             Name = "PatientSearchForm";
             Text = "PatientSearchForm";
             Load += PatientSearchForm_Load;
             ((System.ComponentModel.ISupportInitialize)PatientsDataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)patientModelBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -100,8 +154,11 @@
         #endregion
 
         private Button SearchButton;
-        private Button NewPatientButton;
         private TextBox SearchTextBox;
         private DataGridView PatientsDataGridView;
+        private BindingSource patientModelBindingSource;
+        private DataGridViewTextBoxColumn PathientFullNameColum;
+        private DataGridViewTextBoxColumn PathientDateOfBirthColum;
+        private DataGridViewTextBoxColumn PathientContactColumn;
     }
 }

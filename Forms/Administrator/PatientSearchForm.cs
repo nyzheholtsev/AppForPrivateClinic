@@ -22,7 +22,6 @@ namespace program
         public void UpdateLocalization()
         {
             SearchButton.Text = LocalizationManager.GetString("PatientSearchForm_SearchButton");
-            NewPatientButton.Text = LocalizationManager.GetString("PatientSearchForm_NewButton");
         }
         private void PatientSearchForm_Load(object sender, EventArgs e)
         {
@@ -30,11 +29,6 @@ namespace program
             PatientsDataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             PatientsDataGridView.AllowUserToAddRows = false;
             PatientsDataGridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            if (_currentUser.RoleName == "Лікар")
-            {
-                NewPatientButton.Visible = false;
-            }
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -56,5 +50,6 @@ namespace program
         {
             MessageBox.Show("Тут будет открыта форма 'Новий пацієнт'");
         }
+
     }
 }
