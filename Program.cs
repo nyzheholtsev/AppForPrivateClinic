@@ -1,4 +1,5 @@
 using program.dbClass;
+using program.dbClass.Models;
 using System;
 using System.Windows.Forms;
 

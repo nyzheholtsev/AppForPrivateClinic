@@ -1,4 +1,4 @@
-﻿using program.dbClass;
+﻿using program.dbClass.Models;
 using program.Localization;
 
 

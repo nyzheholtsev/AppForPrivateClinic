@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace program.dbClass
+namespace program.dbClass.Models
 {
     public class UserModel
     {
