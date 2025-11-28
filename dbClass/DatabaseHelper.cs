@@ -109,7 +109,7 @@ namespace program.dbClass
         // =================================тестові=================================
         private static void SeedDefaultData(SQLiteConnection connection)
         {
-            string[] roles = { "Головний Лікар", "Лікар", "Адміністратор" };
+            string[] roles = { "ChiefDoctor", "Doctor", "Administrator" };
             foreach (string role in roles)
             {
                 ExecuteSql(connection, "INSERT INTO Roles (RoleName) VALUES (@name)", new[] {
@@ -117,13 +117,14 @@ namespace program.dbClass
         });
             }
 
+            // 2. Создаем Главврача
             string adminHash = PasswordHelper.ComputeHash("admin");
             string sqlAdmin = @"
             INSERT INTO Users (RoleID, FullName, Specialization, Username, PasswordHash) 
             VALUES (
-                (SELECT RoleID FROM Roles WHERE RoleName = 'Головний Лікар'), 
+                (SELECT RoleID FROM Roles WHERE RoleName = 'ChiefDoctor'), 
                 'Нижегольцев Владислав Іванович', 
-                'Організація охорони здоров''я',
+                'Головний лікар', 
                 'admin', 
                 @hash
             );";
@@ -133,7 +134,7 @@ namespace program.dbClass
             string sqlDoc = @"
             INSERT INTO Users (RoleID, FullName, Specialization, Username, PasswordHash) 
             VALUES (
-                (SELECT RoleID FROM Roles WHERE RoleName = 'Лікар'), 
+                (SELECT RoleID FROM Roles WHERE RoleName = 'Doctor'), 
                 'Петренко Петро Сергійович', 
                 'Терапевт', 
                 'doc', 
@@ -142,21 +143,8 @@ namespace program.dbClass
             ExecuteSql(connection, sqlDoc, new[] { new SQLiteParameter("@hash", docHash) });
 
             SeedScheduleForDoctor(connection, 2);
-
-            SeedPatient(connection, "Тестовий Пацієнт", "1980-05-15", "+380501234567");
-            SeedPatient(connection, "Іванов Іван", "1992-11-30", "+380677654321");
+            Seed50Patients();
         }
-
-        private static void SeedPatient(SQLiteConnection connection, string name, string dob, string phone)
-        {
-            string sql = "INSERT INTO Patients (FullName, DateOfBirth, Contacts, CreatedDate) VALUES (@name, @dob, @phone, @date)";
-            ExecuteSql(connection, sql, new[] {
-                new SQLiteParameter("@name", name),
-                new SQLiteParameter("@dob", dob),
-                new SQLiteParameter("@phone", phone),
-                new SQLiteParameter("@date", DateTime.Now.ToString("yyyy-MM-dd"))
-            });
-            }
 
         private static void SeedScheduleForDoctor(SQLiteConnection connection, int doctorId)
         {

@@ -7,19 +7,17 @@ namespace program.dbClass.Models
         public int UserID { get; set; }
         public string FullName { get; set; }
         public string Specialization { get; set; }
-        public string RoleName { get; set; } 
+        public string RoleName { get; set; }
 
         public UserRole Role
         {
             get
             {
-                return RoleName switch
+                if (Enum.TryParse(RoleName, out UserRole result))
                 {
-                    "Головний Лікар" => UserRole.ChiefDoctor,
-                    "Лікар" => UserRole.Doctor,
-                    "Адміністратор" => UserRole.Administrator,
-                    _ => UserRole.Doctor
-                };
+                    return result;
+                }
+                return UserRole.Doctor;
             }
         }
     }

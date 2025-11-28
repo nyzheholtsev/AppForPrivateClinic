@@ -1,4 +1,5 @@
-﻿using program.dbClass.Models;
+﻿using program.dbClass;
+using program.dbClass.Models;
 using program.Forms;
 using program.Localization;
 
@@ -13,7 +14,7 @@ namespace program
         {
             _currentUser = user;
             _currentLang = language;
-                
+
             InitializeComponent();
 
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -31,14 +32,17 @@ namespace program
             ApplyLocalization();
             SetupUiForRole();
             BindMenuEvents();
-           
+
         }
 
         private void ApplyLocalization()
         {
-            this.Text = string.Format(LocalizationManager.GetString("MainForm_Title"), _currentUser.RoleName);
+            this.Text = string.Format(LocalizationManager.GetString("MainForm_Title"),
+                _currentUser.Role.GetLocalizedName());
 
-            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName, _currentUser.RoleName);
+
+            UserStatusLabel.Text = string.Format(LocalizationManager.GetString("MainForm_UserStatus"), _currentUser.FullName,
+                _currentUser.Role.GetLocalizedName());
 
             FileToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File");
             FileExitToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_File_Exit");

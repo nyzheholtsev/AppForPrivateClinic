@@ -8,6 +8,11 @@
   "LoginForm_ErrorInvalid": "Invalid username or password!",
 
   // ============================================================
+  "Role_ChiefDoctor": "Chief Medical Officer",
+  "Role_Doctor": "Doctor",
+  "Role_Administrator": "Administrator",
+
+  // ============================================================
   "MainForm_Title": "Clinic System (Mode: {0})",
   "MainForm_UserStatus": "User: {0}       Mode: {1}",
   "MainForm_LangToggleButton": "UKR",

@@ -97,14 +97,14 @@
             // 
             PatientSearchToolStripMenuItem.BackColor = Color.Gray;
             PatientSearchToolStripMenuItem.Name = "PatientSearchToolStripMenuItem";
-            PatientSearchToolStripMenuItem.Size = new Size(224, 28);
+            PatientSearchToolStripMenuItem.Size = new Size(199, 28);
             PatientSearchToolStripMenuItem.Text = "PatientSearch";
             // 
             // PatientNewToolStripMenuItem
             // 
             PatientNewToolStripMenuItem.BackColor = Color.Gray;
             PatientNewToolStripMenuItem.Name = "PatientNewToolStripMenuItem";
-            PatientNewToolStripMenuItem.Size = new Size(224, 28);
+            PatientNewToolStripMenuItem.Size = new Size(199, 28);
             PatientNewToolStripMenuItem.Text = "PatientNew";
             PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
             // 
@@ -112,7 +112,7 @@
             // 
             ScheduleToolStripMenuItem.BackColor = Color.Gray;
             ScheduleToolStripMenuItem.Name = "ScheduleToolStripMenuItem";
-            ScheduleToolStripMenuItem.Size = new Size(224, 28);
+            ScheduleToolStripMenuItem.Size = new Size(199, 28);
             ScheduleToolStripMenuItem.Text = "Schedule";
             // 
             // DoctorToolStripMenuItem
@@ -160,7 +160,6 @@
             MainStatusStrip.ImageScalingSize = new Size(20, 20);
             MainStatusStrip.Items.AddRange(new ToolStripItem[] { UserStatusLabel });
             MainStatusStrip.Location = new Point(0, 421);
-            MainStatusStrip.Dock = DockStyle.Bottom;
             MainStatusStrip.Name = "MainStatusStrip";
             MainStatusStrip.Size = new Size(800, 29);
             MainStatusStrip.TabIndex = 2;
