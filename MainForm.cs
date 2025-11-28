@@ -84,7 +84,7 @@ namespace program
                     ScheduleToolStripMenuItem.Visible = false;
                     DoctorToolStripMenuItem.Visible = true;
                     break;
-                    
+
                 case UserRole.Administrator:
                     RegistrarToolStripMenuItem.Visible = true;
                     break;

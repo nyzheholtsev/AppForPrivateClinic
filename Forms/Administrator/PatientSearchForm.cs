@@ -1,19 +1,22 @@
-﻿using program.dbClass;
+﻿
 using program.dbClass.Models;
 using program.Localization;
-using System;
-using System.Windows.Forms;
+using program.Repositories;
+
 
 namespace program
 {
     public partial class PatientSearchForm : Form, Localizable
-    {
+    {   
+
         private UserModel _currentUser;
+        private readonly PatientRepository _patientRepository;
 
         public PatientSearchForm(UserModel user)
         {
             InitializeComponent();
             _currentUser = user;
+            _patientRepository = new PatientRepository();
 
             this.FormBorderStyle = FormBorderStyle.None; // - края
             UpdateLocalization();
@@ -47,14 +50,14 @@ namespace program
         {
             string query = SearchTextBox.Text;
 
-            PatientsDataGridView.DataSource = DatabaseHelper.SearchPatients(query);
+            PatientsDataGridView.DataSource = _patientRepository.Search(query);
             PerformSearch();
         }
 
         private void PerformSearch()
         {
             string query = SearchTextBox.Text;
-            PatientsDataGridView.DataSource = DatabaseHelper.SearchPatients(query);
+            PatientsDataGridView.DataSource = _patientRepository.Search(query);
         }
 
     }

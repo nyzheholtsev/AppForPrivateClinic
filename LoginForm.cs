@@ -1,8 +1,6 @@
-using program.dbClass;
+using program.Repositories;
 using program.dbClass.Models;
 using program.Localization;
-using System;
-using System.Windows.Forms;
 
 namespace program
 {
@@ -16,6 +14,7 @@ namespace program
         public LoginForm()
         {
             InitializeComponent();
+            
             LocalizationManager.LoadLanguage(_currentLang);
             ApplyLocalization();
         }
@@ -47,8 +46,8 @@ namespace program
                 MessageBox.Show(LocalizationManager.GetString("LoginForm_ErrorEmpty"), "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
-            UserModel user = DatabaseHelper.ValidateUser(username, password);
+            UserRepository repo = new UserRepository();
+            UserModel user = repo.ValidateUser(username, password);
 
             if (user != null)
             {

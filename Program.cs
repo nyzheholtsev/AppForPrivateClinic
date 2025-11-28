@@ -15,7 +15,7 @@ namespace program
 
             //DatabaseHelper.Seed50Patients();
 
-            DatabaseHelper.InitializeDatabase();
+            DbInitializer.Initialize();
 
             using (LoginForm loginForm = new LoginForm())
             {
