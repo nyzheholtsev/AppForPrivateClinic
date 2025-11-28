@@ -69,23 +69,23 @@ namespace program
             AdminToolStripMenuItem.Visible = false;
 
 
-            switch (_currentUser.RoleName)
+            switch (_currentUser.Role)
             {
-                case "Головний Лікар":
+                case UserRole.ChiefDoctor:
 
                     RegistrarToolStripMenuItem.Visible = true;
                     DoctorToolStripMenuItem.Visible = true;
                     AdminToolStripMenuItem.Visible = true;
                     break;
 
-                case "Лікар":
+                case UserRole.Doctor:
                     RegistrarToolStripMenuItem.Visible = true;
                     PatientNewToolStripMenuItem.Visible = false;
                     ScheduleToolStripMenuItem.Visible = false;
                     DoctorToolStripMenuItem.Visible = true;
                     break;
-
-                case "Адміністратор":
+                    
+                case UserRole.Administrator:
                     RegistrarToolStripMenuItem.Visible = true;
                     break;
             }

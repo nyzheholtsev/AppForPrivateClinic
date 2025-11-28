@@ -13,7 +13,7 @@ namespace program
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            DatabaseHelper.Seed50Patients();
+            //DatabaseHelper.Seed50Patients();
 
             DatabaseHelper.InitializeDatabase();
 
