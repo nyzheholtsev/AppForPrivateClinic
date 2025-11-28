@@ -143,7 +143,6 @@ namespace program.dbClass
             ExecuteSql(connection, sqlDoc, new[] { new SQLiteParameter("@hash", docHash) });
 
             SeedScheduleForDoctor(connection, 2);
-            Seed50Patients();
         }
 
         private static void SeedScheduleForDoctor(SQLiteConnection connection, int doctorId)
