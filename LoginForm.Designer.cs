@@ -122,7 +122,6 @@
             Controls.Add(UsernameLabel);
             Name = "LoginForm";
             Text = "FormLogin";
-            Load += LoginForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
