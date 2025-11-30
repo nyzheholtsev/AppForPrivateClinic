@@ -1,23 +1,22 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 
 namespace program.Localization
 {
     public static class LocalizationManager
     {
-        private static Dictionary<string, string> _strings = new Dictionary<string, string>();
+        private static Dictionary<string, object> _strings = new Dictionary<string, object>();
         private static string _loadedLang = "";
+
+        public static string CurrentLanguage => _loadedLang;
 
         public static void LoadLanguage(string langCode)
         {
+            if (_loadedLang == langCode && _strings.Count > 0) return;
 
-            if (_loadedLang == langCode && _strings.Count > 0)
-            {
-                return;
-            }
-
-            _strings = new Dictionary<string, string>();
-            _loadedLang = langCode; 
+            _strings = new Dictionary<string, object>();
+            _loadedLang = langCode;
 
             string baseDir = Application.StartupPath;
             string filePath = Path.Combine(baseDir, "Localization", $"{langCode}.json");
@@ -26,28 +25,42 @@ namespace program.Localization
             {
                 if (!File.Exists(filePath))
                 {
-                    MessageBox.Show($"Файл локалізації не знайдено: {filePath}", "Критична помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Application.Exit();
                     return;
                 }
 
                 string json = File.ReadAllText(filePath);
-                _strings = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+                _strings = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Помилка при читанні файлу локалізації: {ex.Message}", "Критична помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Application.Exit();
+                MessageBox.Show($"Помилка локалізації: {ex.Message}");
             }
         }
 
         public static string GetString(string key)
         {
             if (_strings == null || !_strings.ContainsKey(key))
+                return $"[{key}]";
+
+            return _strings[key].ToString();
+        }
+
+        public static string[] GetStringArray(string key)
+        {
+            if (_strings != null && _strings.ContainsKey(key))
             {
-                return $"[{key}_NOT_FOUND]";
+                object val = _strings[key];
+
+                if (val is JArray jArray)
+                {
+                    return jArray.ToObject<string[]>();
+                }
+                if (val is string[] strArray)
+                {
+                    return strArray;
+                }
             }
-            return _strings[key];
+            return new string[0];
         }
     }
 }

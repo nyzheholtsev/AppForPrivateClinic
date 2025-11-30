@@ -16,6 +16,8 @@ namespace program.Forms
             _repository = new PatientRepository();
 
             UpdateLocalization();
+
+            dtpDob.MaxDate = DateTime.Now; // > td
         }
 
         public void UpdateLocalization()
@@ -26,6 +28,8 @@ namespace program.Forms
             lblPhone.Text = LocalizationManager.GetString("PatientAddForm_Label_Phone");
             btnSave.Text = LocalizationManager.GetString("PatientAddForm_Button_Save");
             btnCancel.Text = LocalizationManager.GetString("PatientAddForm_Button_Cancel");
+
+            dtpDob.UpdateLocalization();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -37,6 +41,13 @@ namespace program.Forms
             if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(phone))
             {
                 MessageBox.Show(LocalizationManager.GetString("PatientAddForm_Error_Empty"),
+                                "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (dob.Date > DateTime.Now.Date) // d < td
+            {
+                MessageBox.Show("Дата народження не може бути в майбутньому!",
                                 "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }

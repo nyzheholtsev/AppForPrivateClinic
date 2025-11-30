@@ -20,7 +20,7 @@
             lblFullName = new Label();
             txtFullName = new TextBox();
             lblDob = new Label();
-            dtpDob = new DateTimePicker();
+            dtpDob = new program.Controls.CustomDatePicker();
             lblPhone = new Label();
             txtPhone = new TextBox();
             btnSave = new Button();
@@ -32,7 +32,7 @@
             lblFullName.AutoSize = true;
             lblFullName.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Bold);
             lblFullName.ForeColor = Color.Wheat;
-            lblFullName.Location = new Point(18, 47);
+            lblFullName.Location = new Point(15, 75);
             lblFullName.Name = "lblFullName";
             lblFullName.Size = new Size(89, 23);
             lblFullName.TabIndex = 0;
@@ -41,10 +41,10 @@
             // txtFullName
             // 
             txtFullName.BackColor = Color.Wheat;
-            txtFullName.Font = new Font("Segoe UI", 12F);
-            txtFullName.Location = new Point(169, 47);
+            txtFullName.Font = new Font("Palatino Linotype", 10.2F);
+            txtFullName.Location = new Point(210, 70);
             txtFullName.Name = "txtFullName";
-            txtFullName.Size = new Size(271, 34);
+            txtFullName.Size = new Size(439, 30);
             txtFullName.TabIndex = 1;
             // 
             // lblDob
@@ -52,7 +52,7 @@
             lblDob.AutoSize = true;
             lblDob.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Bold);
             lblDob.ForeColor = Color.Wheat;
-            lblDob.Location = new Point(18, 84);
+            lblDob.Location = new Point(15, 125);
             lblDob.Name = "lblDob";
             lblDob.Size = new Size(109, 23);
             lblDob.TabIndex = 2;
@@ -60,23 +60,21 @@
             // 
             // dtpDob
             // 
-            dtpDob.CalendarForeColor = Color.Wheat;
-            dtpDob.CalendarMonthBackground = Color.DimGray;
-            dtpDob.CalendarTitleBackColor = Color.Gray;
-            dtpDob.CalendarTitleForeColor = Color.Wheat;
-            dtpDob.CalendarTrailingForeColor = Color.Silver;
-            dtpDob.Font = new Font("Segoe UI", 12F);
-            dtpDob.Location = new Point(169, 90);
+            dtpDob.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dtpDob.Location = new Point(210, 120);
+            dtpDob.MaxDate = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            dtpDob.MinDate = new DateTime(0L);
             dtpDob.Name = "dtpDob";
-            dtpDob.Size = new Size(271, 34);
+            dtpDob.Size = new Size(439, 30);
             dtpDob.TabIndex = 3;
+            dtpDob.Value = new DateTime(2025, 11, 30, 15, 54, 24, 380);
             // 
             // lblPhone
             // 
             lblPhone.AutoSize = true;
             lblPhone.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Bold);
             lblPhone.ForeColor = Color.Wheat;
-            lblPhone.Location = new Point(18, 118);
+            lblPhone.Location = new Point(15, 175);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(57, 23);
             lblPhone.TabIndex = 4;
@@ -85,21 +83,21 @@
             // txtPhone
             // 
             txtPhone.BackColor = Color.Wheat;
-            txtPhone.Font = new Font("Segoe UI", 12F);
-            txtPhone.Location = new Point(169, 137);
+            txtPhone.Font = new Font("Palatino Linotype", 10.2F);
+            txtPhone.Location = new Point(210, 170);
             txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(271, 34);
+            txtPhone.Size = new Size(439, 30);
             txtPhone.TabIndex = 5;
             // 
             // btnSave
             // 
-            btnSave.BackColor = Color.DimGray;
+            btnSave.BackColor = Color.Gray;
             btnSave.FlatStyle = FlatStyle.Flat;
-            btnSave.Font = new Font("Palatino Linotype", 12F, FontStyle.Bold);
+            btnSave.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Bold);
             btnSave.ForeColor = Color.Wheat;
-            btnSave.Location = new Point(524, 47);
+            btnSave.Location = new Point(667, 166);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(180, 50);
+            btnSave.Size = new Size(120, 40);
             btnSave.TabIndex = 6;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = false;
@@ -109,11 +107,11 @@
             // 
             btnCancel.BackColor = Color.Gray;
             btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.Font = new Font("Palatino Linotype", 12F, FontStyle.Bold);
+            btnCancel.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Bold);
             btnCancel.ForeColor = Color.Wheat;
-            btnCancel.Location = new Point(524, 121);
+            btnCancel.Location = new Point(667, 70);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(180, 50);
+            btnCancel.Size = new Size(120, 40);
             btnCancel.TabIndex = 7;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = false;
@@ -145,7 +143,8 @@
         private System.Windows.Forms.Label lblFullName;
         private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.Label lblDob;
-        private System.Windows.Forms.DateTimePicker dtpDob;
+        // Обновленный тип
+        private program.Controls.CustomDatePicker dtpDob;
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.Button btnSave;

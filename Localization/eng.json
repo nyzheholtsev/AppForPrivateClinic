@@ -46,5 +46,32 @@
   "PatientAddForm_Button_Save": "Save",
   "PatientAddForm_Button_Cancel": "Clear",
   "PatientAddForm_Message_Success": "Patient added successfully!",
-  "PatientAddForm_Error_Empty": "Please fill in all fields."
+  "PatientAddForm_Error_Empty": "Please fill in all fields.",
+
+  // ============================================================
+  "Calendar_Months": [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ],
+  "Calendar_Days": [
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+    "Su"
+  ]
+
+  // ============================================================
 }
