@@ -37,5 +37,14 @@
 	"PatientSearchForm_SearchButton": "Пошук",
 	"PatientSearchForm_Column_FullName": "Повне ім'я",
 	"PatientSearchForm_Column_DateOfBirth": "Дата народження",
-	"PatientSearchForm_Column_Contact": "Контакти"
+	"PatientSearchForm_Column_Contact": "Контакти",
+
+	// ============================================================
+	"PatientAddForm_Label_Name": "ПІБ:",
+	"PatientAddForm_Label_Dob": "Дата народження:",
+	"PatientAddForm_Label_Phone": "Телефон:",
+	"PatientAddForm_Button_Save": "Зберегти",
+	"PatientAddForm_Button_Cancel": "Очистити",
+	"PatientAddForm_Message_Success": "Пацієнта успішно додано!",
+	"PatientAddForm_Error_Empty": "Будь ласка, заповніть усі поля."
 }

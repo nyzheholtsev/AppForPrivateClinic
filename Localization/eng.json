@@ -37,5 +37,14 @@
   "PatientSearchForm_SearchButton": "Search",
   "PatientSearchForm_Column_FullName": "Full name",
   "PatientSearchForm_Column_DateOfBirth": "Date of birth",
-  "PatientSearchForm_Column_Contact": "Contact"
+  "PatientSearchForm_Column_Contact": "Contact",
+
+  // ============================================================
+  "PatientAddForm_Label_Name": "Full Name:",
+  "PatientAddForm_Label_Dob": "Date of Birth:",
+  "PatientAddForm_Label_Phone": "Phone:",
+  "PatientAddForm_Button_Save": "Save",
+  "PatientAddForm_Button_Cancel": "Clear",
+  "PatientAddForm_Message_Success": "Patient added successfully!",
+  "PatientAddForm_Error_Empty": "Please fill in all fields."
 }

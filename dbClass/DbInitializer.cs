@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SQLite;
-using System.IO;
-using System.Windows.Forms;
-using program.Repositories; // <--- Важливо! Щоб бачити репозиторії
+﻿using System.Data.SQLite;
+using program.Repositories;
 
 namespace program.dbClass
 {
@@ -32,7 +28,6 @@ namespace program.dbClass
                     }
                 }
 
-                // Використовуємо репозиторій для заповнення пацієнтів
                 SeedPatients();
             }
             catch (Exception ex)
@@ -171,7 +166,6 @@ namespace program.dbClass
                 ("Вовк Ірина", DateTime.Parse("1980-07-28"), "+380995770750"),
                 ("Ковальчук Віктор", DateTime.Parse("1971-11-26"), "+380561758083"),
                 ("Лисенко Ольга", DateTime.Parse("1986-10-17"), "+380721159248"),
-                // ... можеш додати більше, якщо треба
             };
 
             foreach (var p in patients)
