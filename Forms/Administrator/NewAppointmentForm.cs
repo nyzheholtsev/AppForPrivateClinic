@@ -40,8 +40,6 @@ namespace program.Forms.Administrator
                 GenerateTimeSlots();
                 UpdateBookButtonState();
             };
-
-            btnBook.Click += btnBook_Click;
         } 
 
         public void UpdateLocalization()
@@ -199,6 +197,7 @@ namespace program.Forms.Administrator
             MessageBox.Show(LocalizationManager.GetString("NewAppointmentForm_Message_Success"),
                             "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            this.Close();
         }
     }
 }
