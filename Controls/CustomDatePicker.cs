@@ -4,6 +4,8 @@ namespace program.Controls
 {
     public class CustomDatePicker : Control, Localizable
     {
+        public event EventHandler ValueChanged;
+            
         private DateTime _value = DateTime.Now;
         public DateTime MinDate { get; set; } = DateTime.MinValue;
         public DateTime MaxDate { get; set; } = DateTime.MaxValue;
@@ -12,6 +14,7 @@ namespace program.Controls
         private Color _foreColor = Color.Black;
         private Color _borderColor = Color.DimGray;
         private Color _iconColor = Color.DimGray;
+
 
         public CustomDatePicker()
         {
@@ -32,6 +35,8 @@ namespace program.Controls
             {
                 _value = value;
                 Invalidate();
+
+                ValueChanged?.Invoke(this, EventArgs.Empty);
             }
         }
 

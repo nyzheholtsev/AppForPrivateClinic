@@ -45,7 +45,7 @@
             // 
             lblPathient.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
             lblPathient.ForeColor = Color.Wheat;
-            lblPathient.Location = new Point(12, 109);
+            lblPathient.Location = new Point(12, 132);
             lblPathient.Name = "lblPathient";
             lblPathient.Size = new Size(81, 25);
             lblPathient.TabIndex = 0;
@@ -54,11 +54,10 @@
             // cmbPatients
             // 
             cmbPatients.BackColor = Color.Wheat;
-            cmbPatients.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPatients.FlatStyle = FlatStyle.Flat;
             cmbPatients.Font = new Font("Palatino Linotype", 10.2F);
             cmbPatients.FormattingEnabled = true;
-            cmbPatients.Location = new Point(108, 103);
+            cmbPatients.Location = new Point(108, 126);
             cmbPatients.Name = "cmbPatients";
             cmbPatients.Size = new Size(393, 31);
             cmbPatients.TabIndex = 1;
@@ -68,7 +67,7 @@
             lblDoctor.AutoSize = true;
             lblDoctor.Font = new Font("Palatino Linotype", 10.2F);
             lblDoctor.ForeColor = Color.Wheat;
-            lblDoctor.Location = new Point(12, 169);
+            lblDoctor.Location = new Point(12, 192);
             lblDoctor.Name = "lblDoctor";
             lblDoctor.Size = new Size(62, 23);
             lblDoctor.TabIndex = 2;
@@ -77,11 +76,10 @@
             // cmbDoctors
             // 
             cmbDoctors.BackColor = Color.Wheat;
-            cmbDoctors.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbDoctors.FlatStyle = FlatStyle.Flat;
             cmbDoctors.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
             cmbDoctors.FormattingEnabled = true;
-            cmbDoctors.Location = new Point(108, 161);
+            cmbDoctors.Location = new Point(108, 184);
             cmbDoctors.Name = "cmbDoctors";
             cmbDoctors.Size = new Size(393, 31);
             cmbDoctors.TabIndex = 3;
@@ -91,7 +89,7 @@
             lblDate.AutoSize = true;
             lblDate.Font = new Font("Palatino Linotype", 10.2F);
             lblDate.ForeColor = Color.Wheat;
-            lblDate.Location = new Point(12, 229);
+            lblDate.Location = new Point(12, 252);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(46, 23);
             lblDate.TabIndex = 4;
@@ -100,7 +98,7 @@
             // dtpDate
             // 
             dtpDate.Font = new Font("Palatino Linotype", 10.2F);
-            dtpDate.Location = new Point(108, 222);
+            dtpDate.Location = new Point(108, 245);
             dtpDate.MaxDate = new DateTime(9999, 12, 31, 23, 59, 59, 999);
             dtpDate.MinDate = new DateTime(0L);
             dtpDate.Name = "dtpDate";
@@ -137,6 +135,7 @@
             btnBook.TabIndex = 8;
             btnBook.Text = "Made Termin";
             btnBook.UseVisualStyleBackColor = true;
+            btnBook.Click += btnBook_Click;
             // 
             // line
             // 

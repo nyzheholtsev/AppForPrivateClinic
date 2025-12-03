@@ -81,6 +81,8 @@
 	"NewAppointmentForm_Label_Date": "Дата:",
 	"NewAppointmentForm_Label_Time": "Час",
 	"NewAppointmentForm_Button_Add": "Створити запис",
-	"NewAppointmentForm_Labell_GD": "Основна інформація"
+	"NewAppointmentForm_Labell_GD": "Основна інформація",
+	"NewAppointmentForm_Message_Success": "Запис створено!",
+	"NewAppointmentForm_Label_haveNoAppointment": "Лікар не працює"
 
 }

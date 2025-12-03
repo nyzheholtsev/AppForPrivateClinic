@@ -79,5 +79,7 @@
   "NewAppointmentForm_Label_Date": "Date:",
   "NewAppointmentForm_Label_Time": "Time",
   "NewAppointmentForm_Button_Add": "Create apointment",
-  "NewAppointmentForm_Labell_GD": "Basicle info"
+  "NewAppointmentForm_Labell_GD": "Basicle info",
+  "NewAppointmentForm_Message_Success": "Appointment create",
+  "NewAppointmentForm_Label_haveNoAppointment": "Sorry, we have not appointment"
 }
