@@ -35,7 +35,7 @@
             RegistrarToolStripMenuItem = new ToolStripMenuItem();
             PatientSearchToolStripMenuItem = new ToolStripMenuItem();
             PatientNewToolStripMenuItem = new ToolStripMenuItem();
-            ScheduleToolStripMenuItem = new ToolStripMenuItem();
+            TerminToolStripMenuItem = new ToolStripMenuItem();
             DoctorToolStripMenuItem = new ToolStripMenuItem();
             MyQueueToolStripMenuItem = new ToolStripMenuItem();
             AdminToolStripMenuItem = new ToolStripMenuItem();
@@ -86,7 +86,7 @@
             // 
             // RegistrarToolStripMenuItem
             // 
-            RegistrarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { PatientSearchToolStripMenuItem, PatientNewToolStripMenuItem, ScheduleToolStripMenuItem });
+            RegistrarToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { PatientSearchToolStripMenuItem, PatientNewToolStripMenuItem, TerminToolStripMenuItem });
             RegistrarToolStripMenuItem.Font = new Font("Palatino Linotype", 10.2F);
             RegistrarToolStripMenuItem.ForeColor = Color.Wheat;
             RegistrarToolStripMenuItem.Name = "RegistrarToolStripMenuItem";
@@ -97,23 +97,24 @@
             // 
             PatientSearchToolStripMenuItem.BackColor = Color.Gray;
             PatientSearchToolStripMenuItem.Name = "PatientSearchToolStripMenuItem";
-            PatientSearchToolStripMenuItem.Size = new Size(199, 28);
+            PatientSearchToolStripMenuItem.Size = new Size(224, 28);
             PatientSearchToolStripMenuItem.Text = "PatientSearch";
             // 
             // PatientNewToolStripMenuItem
             // 
             PatientNewToolStripMenuItem.BackColor = Color.Gray;
             PatientNewToolStripMenuItem.Name = "PatientNewToolStripMenuItem";
-            PatientNewToolStripMenuItem.Size = new Size(199, 28);
+            PatientNewToolStripMenuItem.Size = new Size(224, 28);
             PatientNewToolStripMenuItem.Text = "PatientNew";
             PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
             // 
-            // ScheduleToolStripMenuItem
+            // TerminToolStripMenuItem
             // 
-            ScheduleToolStripMenuItem.BackColor = Color.Gray;
-            ScheduleToolStripMenuItem.Name = "ScheduleToolStripMenuItem";
-            ScheduleToolStripMenuItem.Size = new Size(199, 28);
-            ScheduleToolStripMenuItem.Text = "Schedule";
+            TerminToolStripMenuItem.BackColor = Color.Gray;
+            TerminToolStripMenuItem.Name = "TerminToolStripMenuItem";
+            TerminToolStripMenuItem.Size = new Size(224, 28);
+            TerminToolStripMenuItem.Text = "newTermin";
+            TerminToolStripMenuItem.Click += TerminToolStripMenuItem_Click;
             // 
             // DoctorToolStripMenuItem
             // 
@@ -128,7 +129,7 @@
             // 
             MyQueueToolStripMenuItem.BackColor = Color.Gray;
             MyQueueToolStripMenuItem.Name = "MyQueueToolStripMenuItem";
-            MyQueueToolStripMenuItem.Size = new Size(167, 28);
+            MyQueueToolStripMenuItem.Size = new Size(224, 28);
             MyQueueToolStripMenuItem.Text = "MyQueue";
             // 
             // AdminToolStripMenuItem
@@ -144,14 +145,14 @@
             // 
             ManageUsersToolStripMenuItem.BackColor = Color.Gray;
             ManageUsersToolStripMenuItem.Name = "ManageUsersToolStripMenuItem";
-            ManageUsersToolStripMenuItem.Size = new Size(198, 28);
+            ManageUsersToolStripMenuItem.Size = new Size(224, 28);
             ManageUsersToolStripMenuItem.Text = "ManageUsers";
             // 
             // StatisticsToolStripMenuItem
             // 
             StatisticsToolStripMenuItem.BackColor = Color.Gray;
             StatisticsToolStripMenuItem.Name = "StatisticsToolStripMenuItem";
-            StatisticsToolStripMenuItem.Size = new Size(198, 28);
+            StatisticsToolStripMenuItem.Size = new Size(224, 28);
             StatisticsToolStripMenuItem.Text = "Statistics";
             // 
             // MainStatusStrip
@@ -204,7 +205,7 @@
         private ToolStripMenuItem AdminToolStripMenuItem;
         private ToolStripMenuItem PatientSearchToolStripMenuItem;
         private ToolStripMenuItem PatientNewToolStripMenuItem;
-        private ToolStripMenuItem ScheduleToolStripMenuItem;
+        private ToolStripMenuItem TerminToolStripMenuItem;
         private ToolStripMenuItem MyQueueToolStripMenuItem;
         private ToolStripMenuItem ManageUsersToolStripMenuItem;
         private ToolStripMenuItem StatisticsToolStripMenuItem;

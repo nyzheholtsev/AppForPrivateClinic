@@ -1,6 +1,7 @@
 ﻿using program.dbClass;
 using program.dbClass.Models;
 using program.Forms;
+using program.Forms.Administrator;
 using program.Localization;
 
 namespace program
@@ -51,7 +52,7 @@ namespace program
             RegistrarToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar");
             PatientSearchToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Search");
             PatientNewToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_New");
-            ScheduleToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Schedule");
+            TerminToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Registrar_Schedule");
 
             DoctorToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Doctor");
             MyQueueToolStripMenuItem.Text = LocalizationManager.GetString("MainForm_Menu_Doctor_Queue");
@@ -81,7 +82,7 @@ namespace program
                 case UserRole.Doctor:
                     RegistrarToolStripMenuItem.Visible = true;
                     PatientNewToolStripMenuItem.Visible = false;
-                    ScheduleToolStripMenuItem.Visible = false;
+                    TerminToolStripMenuItem.Visible = false;
                     DoctorToolStripMenuItem.Visible = true;
                     break;
 
@@ -97,7 +98,6 @@ namespace program
             FileExitToolStripMenuItem.Click += (s, e) => Application.Exit();
             PatientSearchToolStripMenuItem.Click += PatientSearchToolStripMenuItem_Click;
             PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
-            ScheduleToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Календар/Розклад'");
             MyQueueToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Моя черга'");
             ManageUsersToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Керування персоналом'");
             StatisticsToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Статистика'");
@@ -239,8 +239,14 @@ namespace program
 
         private void PatientNewToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PatientAddForm searchForm = new PatientAddForm(_currentUser);
+            PatientAddForm addForm = new PatientAddForm(_currentUser);
             OpenPage(new PatientAddForm(_currentUser));
+        }
+
+        private void TerminToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            NewAppointmentForm addAppointment = new NewAppointmentForm(_currentUser);
+            OpenPage(new NewAppointmentForm(_currentUser));
         }
     }
 }

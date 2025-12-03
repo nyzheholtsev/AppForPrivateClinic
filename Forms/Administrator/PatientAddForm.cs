@@ -14,7 +14,7 @@ namespace program.Forms
             InitializeComponent();
             _currentUser = user;
             _repository = new PatientRepository();
-
+            
             UpdateLocalization();
 
             dtpDob.MaxDate = DateTime.Now; // > td

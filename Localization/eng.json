@@ -71,7 +71,13 @@
     "Fr",
     "Sa",
     "Su"
-  ]
+  ],
 
   // ============================================================
+  "NewAppointmentForm_Label_Patient": "Pathient:",
+  "NewAppointmentForm_Label_Doctor": "Doctor:",
+  "NewAppointmentForm_Label_Date": "Date:",
+  "NewAppointmentForm_Label_Time": "Time",
+  "NewAppointmentForm_Button_Add": "Create apointment",
+  "NewAppointmentForm_Labell_GD": "Basicle info"
 }

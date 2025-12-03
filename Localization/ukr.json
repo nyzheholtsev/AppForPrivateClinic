@@ -24,7 +24,7 @@
 	"MainForm_Menu_Registrar": "Реєстратура",
 	"MainForm_Menu_Registrar_Search": "Пошук пацієнта",
 	"MainForm_Menu_Registrar_New": "Новий пацієнт",
-	"MainForm_Menu_Registrar_Schedule": "Календар/Розклад",
+	"MainForm_Menu_Registrar_Schedule": "Створити новий запис",
 
 	"MainForm_Menu_Doctor": "Прийом",
 	"MainForm_Menu_Doctor_Queue": "Моя черга",
@@ -72,7 +72,15 @@
 		"Пт",
 		"Сб",
 		"Нд"
-	]
+	],
 
 	// ============================================================
+
+	"NewAppointmentForm_Label_Patient": "Паціент:",
+	"NewAppointmentForm_Label_Doctor": "Лікар:",
+	"NewAppointmentForm_Label_Date": "Дата:",
+	"NewAppointmentForm_Label_Time": "Час",
+	"NewAppointmentForm_Button_Add": "Створити запис",
+	"NewAppointmentForm_Labell_GD": "Основна інформація"
+
 }
