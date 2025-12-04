@@ -2,6 +2,7 @@
 using program.dbClass.Models;
 using program.Forms;
 using program.Forms.Administrator;
+using program.Forms.chiefDoctor;
 using program.Forms.Doctor;
 using program.Localization;
 
@@ -99,7 +100,7 @@ namespace program
             FileExitToolStripMenuItem.Click += (s, e) => Application.Exit();
             PatientSearchToolStripMenuItem.Click += PatientSearchToolStripMenuItem_Click;
             PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
-            ManageUsersToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Керування персоналом'");
+            ManageUsersToolStripMenuItem.Click += (s, e) => OpenPage(new ManageUsersForm(_currentUser));
             StatisticsToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Статистика'");
         }
 

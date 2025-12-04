@@ -97,14 +97,14 @@
             // 
             PatientSearchToolStripMenuItem.BackColor = Color.Gray;
             PatientSearchToolStripMenuItem.Name = "PatientSearchToolStripMenuItem";
-            PatientSearchToolStripMenuItem.Size = new Size(224, 28);
+            PatientSearchToolStripMenuItem.Size = new Size(199, 28);
             PatientSearchToolStripMenuItem.Text = "PatientSearch";
             // 
             // PatientNewToolStripMenuItem
             // 
             PatientNewToolStripMenuItem.BackColor = Color.Gray;
             PatientNewToolStripMenuItem.Name = "PatientNewToolStripMenuItem";
-            PatientNewToolStripMenuItem.Size = new Size(224, 28);
+            PatientNewToolStripMenuItem.Size = new Size(199, 28);
             PatientNewToolStripMenuItem.Text = "PatientNew";
             PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
             // 
@@ -112,7 +112,7 @@
             // 
             TerminToolStripMenuItem.BackColor = Color.Gray;
             TerminToolStripMenuItem.Name = "TerminToolStripMenuItem";
-            TerminToolStripMenuItem.Size = new Size(224, 28);
+            TerminToolStripMenuItem.Size = new Size(199, 28);
             TerminToolStripMenuItem.Text = "newTermin";
             TerminToolStripMenuItem.Click += TerminToolStripMenuItem_Click;
             // 
@@ -129,7 +129,7 @@
             // 
             MyQueueToolStripMenuItem.BackColor = Color.Gray;
             MyQueueToolStripMenuItem.Name = "MyQueueToolStripMenuItem";
-            MyQueueToolStripMenuItem.Size = new Size(224, 28);
+            MyQueueToolStripMenuItem.Size = new Size(167, 28);
             MyQueueToolStripMenuItem.Text = "MyQueue";
             MyQueueToolStripMenuItem.Click += MyQueueToolStripMenuItem_Click;
             // 

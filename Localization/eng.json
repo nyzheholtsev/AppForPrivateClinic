@@ -114,5 +114,16 @@
   "Status_Scheduled": "Scheduled",
   "Status_InProgress": "In Progress",
   "Status_Completed": "Completed",
-  "Status_Cancelled": "Cancelled"
+  "Status_Cancelled": "Cancelled",
+
+  // ============================================================
+  "ManageUsers_Title": "Staff Management",
+  "ManageUsers_Col_Name": "Full Name",
+  "ManageUsers_Col_Role": "Role",
+  "ManageUsers_Col_Spec": "Specialization",
+  "ManageUsers_Col_Active": "Active",
+  "ManageUsers_Btn_Add": "Add Staff",
+  "ManageUsers_Btn_Fire": "Fire / Restore",
+  "ManageUsers_Btn_Schedule": "Work Schedule",
+  "ManageUsers_Btn_Auto": "Auto-Schedule"
 }

@@ -115,5 +115,16 @@
 	"Status_Scheduled": "Заплановано",
 	"Status_InProgress": "Триває",
 	"Status_Completed": "Завершено",
-	"Status_Cancelled": "Скасовано"
+	"Status_Cancelled": "Скасовано",
+
+	// ============================================================
+	"ManageUsers_Title": "Керування персоналом",
+	"ManageUsers_Col_Name": "ПІБ",
+	"ManageUsers_Col_Role": "Посада",
+	"ManageUsers_Col_Spec": "Спеціалізація",
+	"ManageUsers_Col_Active": "Активний",
+	"ManageUsers_Btn_Add": "Додати працівника",
+	"ManageUsers_Btn_Fire": "Звільнити / Поновити",
+	"ManageUsers_Btn_Schedule": "Графік роботи",
+	"ManageUsers_Btn_Auto": "Авто-розклад"
 }

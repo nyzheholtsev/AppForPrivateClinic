@@ -13,13 +13,11 @@ namespace program
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //DatabaseHelper.Seed50Patients();
-            
             DbInitializer.Initialize();
 
-            //DbInitializer.SeedPatientHistory(1);
-
-
+            //PatientSeeder seeder = new PatientSeeder();
+            //seeder.Seed(50);
+          
             using (LoginForm loginForm = new LoginForm())
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)
