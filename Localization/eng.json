@@ -100,5 +100,19 @@
   "DoctorConsultation_Label_Treatment": "Treatment:",
   "DoctorConsultation_Label_Notes": "Notes:",
   "DoctorConsultation_Btn_Finish": "Finish Appointment",
+  "DoctorConsultation_Btn_History": "History",
   "DoctorConsultation_Btn_Close": "Close",
+
+  // ============================================================
+  "History_Title": "Patient History",
+  "History_Col_Date": "Date/Time",
+  "History_Col_Diagnosis": "Diagnosis",
+  "History_Col_Treatment": "Treatment",
+  "History_Col_Notes": "Notes",
+
+  // ============================================================
+  "Status_Scheduled": "Scheduled",
+  "Status_InProgress": "In Progress",
+  "Status_Completed": "Completed",
+  "Status_Cancelled": "Cancelled"
 }

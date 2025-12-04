@@ -28,7 +28,7 @@ namespace program.Forms.Doctor
             lblDiagnos.Text = LocalizationManager.GetString("DoctorConsultation_Label_Diagnosis");
             lblTreatment.Text = LocalizationManager.GetString("DoctorConsultation_Label_Treatment");
             lblNote.Text = LocalizationManager.GetString("DoctorConsultation_Label_Notes");
-
+            btnHistory.Text = LocalizationManager.GetString("DoctorConsultation_Btn_History");
             btnFinish.Text = LocalizationManager.GetString("DoctorConsultation_Btn_Finish");
             btnClose.Text = LocalizationManager.GetString("DoctorConsultation_Btn_Close");
         }

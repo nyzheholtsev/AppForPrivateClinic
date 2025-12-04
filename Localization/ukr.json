@@ -101,6 +101,19 @@
 	"DoctorConsultation_Label_Treatment": "Лікування:",
 	"DoctorConsultation_Label_Notes": "Нотатки:",
 	"DoctorConsultation_Btn_Finish": "Завершити прийом",
+	"DoctorConsultation_Btn_History": "Історія",
 	"DoctorConsultation_Btn_Close": "Закрити",
 
+	// ============================================================
+	"History_Title": "Історія хвороби",
+	"History_Col_Date": "Дата/Час",
+	"History_Col_Diagnosis": "Діагноз",
+	"History_Col_Treatment": "Лікування",
+	"History_Col_Notes": "Нотатки",
+
+	// ============================================================
+	"Status_Scheduled": "Заплановано",
+	"Status_InProgress": "Триває",
+	"Status_Completed": "Завершено",
+	"Status_Cancelled": "Скасовано"
 }

@@ -26,9 +26,12 @@ namespace program.Forms.Doctor
             dgvQueue.ColumnHeadersDefaultCellStyle.Font = new Font("Palatino Linotype", 10, FontStyle.Bold);
             dgvQueue.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.DimGray;
 
- 
-            dgvQueue.SelectionMode = DataGridViewSelectionMode.FullRowSelect; 
+            dgvQueue.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvQueue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+            if (dgvQueue.Columns["colStatus"] != null)
+            {
+                dgvQueue.Columns["colStatus"].DataPropertyName = "StatusLocalized";
+            }
 
             UpdateLocalization();
         }
@@ -47,8 +50,15 @@ namespace program.Forms.Doctor
                 dgvQueue.Columns["colStatus"].HeaderText = LocalizationManager.GetString("DoctorQueue_Col_Status");
 
             btnPatientAbsent.Text = LocalizationManager.GetString("DoctorQueue_Btn_Absent");
-
             UpdateNextPatientUI();
+            foreach (Control c in this.Controls)
+            {
+                if (c is Localizable localizableControl)
+                {
+                    localizableControl.UpdateLocalization();
+                }
+            }
+            LoadQueue();
         }
 
         private void DoctorQueueForm_Load(object sender, EventArgs e)
@@ -131,14 +141,15 @@ namespace program.Forms.Doctor
 
             string msg = string.Format(LocalizationManager.GetString("DoctorQueue_Msg_AbsentConfirm"), _nextAppointment.PatientName);
 
-            var result = MessageBox.Show(msg,
-                                         "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var result = MessageBox.Show(msg, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
                 _repo.UpdateStatus(_nextAppointment.AppointmentID, AppointmentStatus.Cancelled);
                 LoadQueue();
             }
+
+            UpdateLocalization();
         }
     }
 }

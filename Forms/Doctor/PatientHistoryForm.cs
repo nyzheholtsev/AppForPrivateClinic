@@ -1,14 +1,9 @@
-﻿using program.dbClass;
+﻿using program.Localization;
 using program.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Drawing;
 
-// ВАЖЛИВО: Тут має бути .Doctor, бо файл лежить у папці Doctor
 namespace program.Forms.Doctor
 {
-    // ВАЖЛИВО: Клас має наслідуватися від Form
+
     public partial class PatientHistoryForm : Form
     {
         private int _patientId;
@@ -16,19 +11,33 @@ namespace program.Forms.Doctor
 
         public PatientHistoryForm(int patientId)
         {
-            InitializeComponent(); // Тепер ця помилка має зникнути
+            InitializeComponent(); 
             _patientId = patientId;
             _repo = new MedicalRecordRepository();
 
-            // Налаштування стилів (про всяк випадок, якщо дизайнер збився)
             SetupGridStyles();
-
+            UpdateLocalization();
             LoadHistory();
+        }
+        public void UpdateLocalization()
+        {
+            this.Text = LocalizationManager.GetString("History_Title");
+
+            if (dgvHistory.Columns["colDate"] != null)
+                dgvHistory.Columns["colDate"].HeaderText = LocalizationManager.GetString("History_Col_Date");
+
+            if (dgvHistory.Columns["colDiagnosis"] != null)
+                dgvHistory.Columns["colDiagnosis"].HeaderText = LocalizationManager.GetString("History_Col_Diagnosis");
+
+            if (dgvHistory.Columns["colTreatment"] != null)
+                dgvHistory.Columns["colTreatment"].HeaderText = LocalizationManager.GetString("History_Col_Treatment");
+
+            if (dgvHistory.Columns["colNotes"] != null)
+                dgvHistory.Columns["colNotes"].HeaderText = LocalizationManager.GetString("History_Col_Notes");
         }
 
         private void SetupGridStyles()
         {
-            // Перевіряємо, чи існує грід, перш ніж налаштовувати
             if (dgvHistory == null) return;
 
             dgvHistory.EnableHeadersVisualStyles = false;
