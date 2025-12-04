@@ -53,24 +53,27 @@
             // lblDiagnos
             // 
             lblDiagnos.AutoSize = true;
-            lblDiagnos.Location = new Point(30, 95);
+            lblDiagnos.Font = new Font("Palatino Linotype", 10.2F);
+            lblDiagnos.Location = new Point(30, 97);
             lblDiagnos.Name = "lblDiagnos";
-            lblDiagnos.Size = new Size(94, 23);
+            lblDiagnos.Size = new Size(93, 23);
             lblDiagnos.TabIndex = 1;
             lblDiagnos.Text = "lblDiagnos";
             // 
             // lblTreatment
             // 
             lblTreatment.AutoSize = true;
-            lblTreatment.Location = new Point(29, 131);
+            lblTreatment.Font = new Font("Palatino Linotype", 10.2F);
+            lblTreatment.Location = new Point(29, 152);
             lblTreatment.Name = "lblTreatment";
-            lblTreatment.Size = new Size(82, 23);
+            lblTreatment.Size = new Size(83, 23);
             lblTreatment.TabIndex = 2;
             lblTreatment.Text = "lblTerapy";
             // 
             // lblNote
             // 
-            lblNote.Location = new Point(340, 132);
+            lblNote.Font = new Font("Palatino Linotype", 10.2F);
+            lblNote.Location = new Point(340, 150);
             lblNote.Name = "lblNote";
             lblNote.Size = new Size(240, 25);
             lblNote.TabIndex = 3;
@@ -79,56 +82,68 @@
             // txtDiagnosis
             // 
             txtDiagnosis.BackColor = Color.Gray;
-            txtDiagnosis.Location = new Point(129, 95);
+            txtDiagnosis.Font = new Font("Palatino Linotype", 10.2F);
+            txtDiagnosis.Location = new Point(129, 92);
             txtDiagnosis.Multiline = true;
             txtDiagnosis.Name = "txtDiagnosis";
-            txtDiagnosis.Size = new Size(645, 25);
+            txtDiagnosis.Size = new Size(645, 34);
             txtDiagnosis.TabIndex = 4;
             // 
             // txtTreatment
             // 
             txtTreatment.BackColor = Color.Gray;
-            txtTreatment.Location = new Point(30, 157);
+            txtTreatment.Font = new Font("Palatino Linotype", 10.2F);
+            txtTreatment.Location = new Point(30, 178);
             txtTreatment.Multiline = true;
             txtTreatment.Name = "txtTreatment";
-            txtTreatment.Size = new Size(285, 175);
+            txtTreatment.Size = new Size(285, 154);
             txtTreatment.TabIndex = 5;
             // 
             // txtNotes
             // 
             txtNotes.BackColor = Color.Gray;
-            txtNotes.Location = new Point(340, 157);
+            txtNotes.Font = new Font("Palatino Linotype", 10.2F);
+            txtNotes.Location = new Point(340, 178);
             txtNotes.Multiline = true;
             txtNotes.Name = "txtNotes";
-            txtNotes.Size = new Size(434, 175);
+            txtNotes.Size = new Size(434, 154);
             txtNotes.TabIndex = 6;
             // 
             // btnFinish
             // 
+            btnFinish.FlatStyle = FlatStyle.Flat;
+            btnFinish.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
             btnFinish.Location = new Point(574, 348);
             btnFinish.Name = "btnFinish";
             btnFinish.Size = new Size(200, 30);
             btnFinish.TabIndex = 7;
             btnFinish.Text = "btnFinish";
             btnFinish.UseVisualStyleBackColor = true;
+            btnFinish.Click += btnFinish_Click;
             // 
             // btnEdit
             // 
-            btnEdit.Location = new Point(305, 348);
+            btnEdit.FlatStyle = FlatStyle.Flat;
+            btnEdit.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            btnEdit.Location = new Point(291, 348);
             btnEdit.Name = "btnEdit";
             btnEdit.Size = new Size(200, 30);
             btnEdit.TabIndex = 8;
             btnEdit.Text = "btnEdit";
             btnEdit.UseVisualStyleBackColor = true;
+            btnEdit.Click += btnEdit_Click;
             // 
             // btnClose
             // 
+            btnClose.FlatStyle = FlatStyle.Flat;
+            btnClose.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
             btnClose.Location = new Point(30, 348);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(200, 30);
             btnClose.TabIndex = 9;
             btnClose.Text = "btnClose";
             btnClose.UseVisualStyleBackColor = true;
+            btnClose.Click += btnClose_Click;
             // 
             // DoctorConsultationForm
             // 

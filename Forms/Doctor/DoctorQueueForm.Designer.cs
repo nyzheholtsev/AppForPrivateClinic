@@ -38,10 +38,10 @@
             lblNextTime = new Label();
             lblNextPatientName = new Label();
             dgvQueue = new DataGridView();
-            appointmentModelBindingSource = new BindingSource(components);
             colTime = new DataGridViewTextBoxColumn();
             colPatient = new DataGridViewTextBoxColumn();
             colStatus = new DataGridViewTextBoxColumn();
+            appointmentModelBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -82,6 +82,7 @@
             btnPatientAbsent.TabIndex = 3;
             btnPatientAbsent.Text = "btnPatientAbsent";
             btnPatientAbsent.UseVisualStyleBackColor = true;
+            btnPatientAbsent.Click += btnPatientAbsent_Click_1;
             // 
             // btnStartAppointment
             // 
@@ -93,6 +94,7 @@
             btnStartAppointment.TabIndex = 2;
             btnStartAppointment.Text = "btnStartAppointment";
             btnStartAppointment.UseVisualStyleBackColor = true;
+            btnStartAppointment.Click += btnStartAppointment_Click;
             // 
             // lblNextTime
             // 
@@ -106,7 +108,7 @@
             // 
             // lblNextPatientName
             // 
-            lblNextPatientName.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            lblNextPatientName.Font = new Font("Palatino Linotype", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
             lblNextPatientName.Location = new Point(30, 49);
             lblNextPatientName.Margin = new Padding(4, 0, 4, 0);
             lblNextPatientName.Name = "lblNextPatientName";
@@ -128,10 +130,6 @@
             dgvQueue.RowHeadersWidth = 51;
             dgvQueue.Size = new Size(505, 314);
             dgvQueue.TabIndex = 0;
-            // 
-            // appointmentModelBindingSource
-            // 
-            appointmentModelBindingSource.DataSource = typeof(dbClass.AppointmentModel);
             // 
             // colTime
             // 
@@ -177,6 +175,10 @@
             colStatus.ReadOnly = true;
             colStatus.Width = 125;
             // 
+            // appointmentModelBindingSource
+            // 
+            appointmentModelBindingSource.DataSource = typeof(dbClass.AppointmentModel);
+            // 
             // DoctorQueueForm
             // 
             AutoScaleDimensions = new SizeF(10F, 23F);
@@ -189,6 +191,7 @@
             Margin = new Padding(4, 3, 4, 3);
             Name = "DoctorQueueForm";
             Text = "DoctorQueueForm";
+            Load += DoctorQueueForm_Load;
             splitContainer1.Panel1.ResumeLayout(false);
             splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);

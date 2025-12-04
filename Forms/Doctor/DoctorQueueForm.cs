@@ -18,6 +18,7 @@ namespace program.Forms.Doctor
             _currentUser = user;
             _repo = new AppointmentRepository();
 
+            dgvQueue.AutoGenerateColumns = false;
             dgvQueue.EnableHeadersVisualStyles = false;
 
             dgvQueue.ColumnHeadersDefaultCellStyle.BackColor = Color.DimGray;
@@ -27,7 +28,7 @@ namespace program.Forms.Doctor
 
  
             dgvQueue.SelectionMode = DataGridViewSelectionMode.FullRowSelect; 
-            dgvQueue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvQueue.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
 
             UpdateLocalization();
         }
@@ -108,7 +109,11 @@ namespace program.Forms.Doctor
             }
 
             DoctorConsultationForm consultationForm = new DoctorConsultationForm(_nextAppointment);
-            consultationForm.ShowDialog();
+            consultationForm.TopLevel = false;          
+            consultationForm.FormBorderStyle = FormBorderStyle.None; 
+            consultationForm.Dock = DockStyle.Fill;   
+            this.Controls.Add(consultationForm);      
+            consultationForm.Show();
 
             LoadQueue();
         }

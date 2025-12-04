@@ -82,9 +82,6 @@ namespace program.Forms.Doctor
             );
 
             _apptRepo.UpdateStatus(_appointment.AppointmentID, AppointmentStatus.Completed);
-
-            MessageBox.Show(LocalizationManager.GetString("DoctorConsultation_Msg_Success"),
-                            "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
 
