@@ -30,14 +30,12 @@ namespace program.Forms.Doctor
             lblNote.Text = LocalizationManager.GetString("DoctorConsultation_Label_Notes");
 
             btnFinish.Text = LocalizationManager.GetString("DoctorConsultation_Btn_Finish");
-            btnEdit.Text = LocalizationManager.GetString("DoctorConsultation_Btn_Edit");
             btnClose.Text = LocalizationManager.GetString("DoctorConsultation_Btn_Close");
         }
 
         private void SetupUI()
         {
             lblPatientInfo.Text = $"{_appointment.PatientName} ({_appointment.AppointmentTime})";
-
             var record = _recordRepo.GetByAppointmentId(_appointment.AppointmentID);
 
             if (record != null)
@@ -47,29 +45,7 @@ namespace program.Forms.Doctor
                 txtNotes.Text = record.Notes;
             }
 
-            if (_appointment.StatusEnum == AppointmentStatus.Completed)
-            {
-                SetFieldsEnabled(false);
-                btnFinish.Enabled = false;
-                btnEdit.Visible = true;
-            }
-            else
-            {
-                SetFieldsEnabled(true);
-                btnFinish.Enabled = true;
-                btnEdit.Visible = false;
-            }
-        }
-
-        private void SetFieldsEnabled(bool enabled)
-        {
-            txtDiagnosis.ReadOnly = !enabled;
-            txtTreatment.ReadOnly = !enabled;
-            txtNotes.ReadOnly = !enabled;
-            Color backColor = enabled ? Color.Wheat : Color.Silver;
-            txtDiagnosis.BackColor = backColor;
-            txtTreatment.BackColor = backColor;
-            txtNotes.BackColor = backColor;
+            btnFinish.Enabled = true;
         }
 
         private void btnFinish_Click(object sender, EventArgs e)
@@ -85,16 +61,22 @@ namespace program.Forms.Doctor
             this.Close();
         }
 
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            SetFieldsEnabled(true);
-            btnFinish.Enabled = true;
-            btnEdit.Visible = false;
-        }
-
         private void btnClose_Click(object sender, EventArgs e)
         {
+            _recordRepo.SaveOrUpdate(
+                _appointment.AppointmentID,
+                txtDiagnosis.Text,
+                txtTreatment.Text,
+                txtNotes.Text
+            );
+
             this.Close();
+        }
+
+        private void btnHistory_Click(object sender, EventArgs e)
+        {
+            PatientHistoryForm historyForm = new PatientHistoryForm(_appointment.PatientID);
+            historyForm.ShowDialog();
         }
     }
 }

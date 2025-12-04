@@ -103,16 +103,23 @@ namespace program.Forms.Doctor
         {
             if (_nextAppointment == null) return;
 
-            if (_nextAppointment.StatusEnum == AppointmentStatus.Scheduled)
+            if (_nextAppointment.StatusEnum == AppointmentStatus.Scheduled)//статус апдейт
             {
                 _repo.UpdateStatus(_nextAppointment.AppointmentID, AppointmentStatus.InProgress);
+                _nextAppointment.StatusEnum = AppointmentStatus.InProgress;
             }
 
             DoctorConsultationForm consultationForm = new DoctorConsultationForm(_nextAppointment);
-            consultationForm.TopLevel = false;          
-            consultationForm.FormBorderStyle = FormBorderStyle.None; 
-            consultationForm.Dock = DockStyle.Fill;   
-            this.Controls.Add(consultationForm);      
+
+            consultationForm.TopLevel = false;
+            consultationForm.FormBorderStyle = FormBorderStyle.None;
+            consultationForm.Dock = DockStyle.Fill;
+
+            this.Controls.Add(consultationForm);
+            consultationForm.BringToFront();
+
+
+            consultationForm.FormClosed += (s, args) => LoadQueue();
             consultationForm.Show();
 
             LoadQueue();

@@ -28,7 +28,6 @@ namespace program.dbClass
                     }
                 }
 
-                SeedPatients();
             }
             catch (Exception ex)
             {
@@ -156,21 +155,66 @@ namespace program.dbClass
             }
         }
 
-        private static void SeedPatients()
+        public static void SeedPatientHistory(int patientId)
         {
-            var repo = new PatientRepository();
-            if (repo.Search("").Count > 10) return;
-
-            var patients = new List<(string Name, DateTime Dob, string Phone)>
+            using (var connection = new SQLiteConnection(_connectionString))
             {
-                ("Вовк Ірина", DateTime.Parse("1980-07-28"), "+380995770750"),
-                ("Ковальчук Віктор", DateTime.Parse("1971-11-26"), "+380561758083"),
-                ("Лисенко Ольга", DateTime.Parse("1986-10-17"), "+380721159248"),
-            };
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        for (int i = 1; i <= 8; i++)
+                        {
+                            string pastDate = DateTime.Now.AddMonths(-i).ToString("yyyy-MM-dd");
 
-            foreach (var p in patients)
-            {
-                repo.Add(p.Name, p.Dob, p.Phone);
+                            string sqlApp = @"
+                        INSERT INTO Appointments (PatientID, UserID, AppointmentDate, AppointmentTime, Status) 
+                        VALUES (@pid, 2, @date, '10:00', 'Completed'); 
+                        SELECT last_insert_rowid();";
+
+                            long appointmentId;
+                            using (var cmd = new SQLiteCommand(sqlApp, connection))
+                            {
+                                cmd.Parameters.AddWithValue("@pid", patientId);
+                                cmd.Parameters.AddWithValue("@date", pastDate);
+                                appointmentId = (long)cmd.ExecuteScalar();
+                            }
+
+                            string sqlRecord = @"
+                        INSERT INTO MedicalRecords (AppointmentID, Diagnosis, Treatment, Notes) 
+                        VALUES (@aid, @diag, @treat, @note)";
+
+                            using (var cmd = new SQLiteCommand(sqlRecord, connection))
+                            {
+                                cmd.Parameters.AddWithValue("@aid", appointmentId);
+                                cmd.Parameters.AddWithValue("@diag", $"Тестовий діагноз №{i} (ГРВІ)");
+                                cmd.Parameters.AddWithValue("@treat", $"Приймати вітаміни, пити багато води. Курс №{i}");
+                                cmd.Parameters.AddWithValue("@note", $"Пацієнт скаржився на головний біль. Температура 36.{i}");
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                        string todayDate = DateTime.Now.ToString("yyyy-MM-dd");
+                        string sqlFuture = @"
+                    INSERT INTO Appointments (PatientID, UserID, AppointmentDate, AppointmentTime, Status) 
+                    VALUES (@pid, 2, @date, '21:00', 'Scheduled')";
+
+                        using (var cmd = new SQLiteCommand(sqlFuture, connection))
+                        {
+                            cmd.Parameters.AddWithValue("@pid", patientId);
+                            cmd.Parameters.AddWithValue("@date", todayDate);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        MessageBox.Show("Тестові дані успішно додано!");
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show($"Помилка додавання тестових даних: {ex.Message}");
+                    }
+                }
             }
         }
 

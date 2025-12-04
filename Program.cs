@@ -14,8 +14,11 @@ namespace program
             Application.SetCompatibleTextRenderingDefault(false);
 
             //DatabaseHelper.Seed50Patients();
-
+            
             DbInitializer.Initialize();
+
+            //DbInitializer.SeedPatientHistory(1);
+
 
             using (LoginForm loginForm = new LoginForm())
             {
