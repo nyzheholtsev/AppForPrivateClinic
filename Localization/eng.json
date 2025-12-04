@@ -125,5 +125,26 @@
   "ManageUsers_Btn_Add": "Add Staff",
   "ManageUsers_Btn_Fire": "Fire / Restore",
   "ManageUsers_Btn_Schedule": "Work Schedule",
-  "ManageUsers_Btn_Auto": "Auto-Schedule"
+  "ManageUsers_Btn_Auto": "Auto-Schedule",
+
+  // ============================================================
+  "Schedule_Title": "Schedule Management",
+  "Schedule_Label_Doctor": "Doctor:",
+  "Schedule_Label_WorkTime": "Working Hours:",
+  "Schedule_Label_LunchTime": "Lunch Break:",
+  "Schedule_Btn_Save": "Save Day",
+  "Schedule_Btn_Delete": "Set as Day Off",
+  "Schedule_Group_Auto": "Auto-Fill (Weekdays 09:00 - 17:00)",
+  "Schedule_Btn_Auto": "Fill Month",
+
+  // ============================================================
+  "Stats_Title": "Statistics & Reports",
+  "Stats_Label_Type": "Report Type:",
+  "Stats_Label_Period": "Period:",
+  "Stats_Btn_Show": "Show Data",
+  "Stats_Btn_Export": "Export to Excel (.csv)",
+  "Stats_Type_Workload": "Doctors Workload",
+  "Stats_Type_Visits": "Visits by Date",
+  "Stats_Type_Diagnoses": "Common Diagnoses",
+  "Stats_Msg_ExportSuccess": "Report successfully saved to:\n{0}"
 }

@@ -76,5 +76,11 @@ namespace program.Forms.chiefDoctor
                 LoadUsers();
             }
         }
+
+        private void btnEditSchedule_Click(object sender, EventArgs e)
+        {
+            DoctorScheduleForm form = new DoctorScheduleForm();
+            form.ShowDialog();
+        }
     }
 }

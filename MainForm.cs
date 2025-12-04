@@ -101,7 +101,7 @@ namespace program
             PatientSearchToolStripMenuItem.Click += PatientSearchToolStripMenuItem_Click;
             PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
             ManageUsersToolStripMenuItem.Click += (s, e) => OpenPage(new ManageUsersForm(_currentUser));
-            StatisticsToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Статистика'");
+            StatisticsToolStripMenuItem.Click += (s, e) => OpenPage(new program.Forms.chiefDoctor.StatisticsForm());
         }
 
         private class CustomColorTable : ProfessionalColorTable

@@ -126,5 +126,27 @@
 	"ManageUsers_Btn_Add": "Додати працівника",
 	"ManageUsers_Btn_Fire": "Звільнити / Поновити",
 	"ManageUsers_Btn_Schedule": "Графік роботи",
-	"ManageUsers_Btn_Auto": "Авто-розклад"
+	"ManageUsers_Btn_Auto": "Авто-розклад",
+
+	// ============================================================
+	"Schedule_Title": "Керування розкладом",
+	"Schedule_Label_Doctor": "Лікар:",
+	"Schedule_Label_WorkTime": "Робочий час:",
+	"Schedule_Label_LunchTime": "Обідня перерва:",
+	"Schedule_Btn_Save": "Зберегти день",
+	"Schedule_Btn_Delete": "Зробити вихідним",
+	"Schedule_Group_Auto": "Авто-заповнення (Будні 09:00 - 17:00)",
+	"Schedule_Btn_Auto": "Заповнити місяць",
+
+	// ============================================================
+	"Stats_Title": "Статистика та Звіти",
+	"Stats_Label_Type": "Тип звіту:",
+	"Stats_Label_Period": "Період:",
+	"Stats_Btn_Show": "Показати",
+	"Stats_Btn_Export": "Експорт в Excel (.csv)",
+	"Stats_Type_Workload": "Завантаженість лікарів",
+	"Stats_Type_Visits": "Відвідування по днях",
+	"Stats_Type_Diagnoses": "Популярні діагнози",
+	"Stats_Msg_ExportSuccess": "Звіт успішно збережено у файл:\n{0}"
+
 }
