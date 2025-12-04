@@ -2,6 +2,7 @@
 using program.dbClass.Models;
 using program.Forms;
 using program.Forms.Administrator;
+using program.Forms.Doctor;
 using program.Localization;
 
 namespace program
@@ -98,7 +99,6 @@ namespace program
             FileExitToolStripMenuItem.Click += (s, e) => Application.Exit();
             PatientSearchToolStripMenuItem.Click += PatientSearchToolStripMenuItem_Click;
             PatientNewToolStripMenuItem.Click += PatientNewToolStripMenuItem_Click;
-            MyQueueToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Моя черга'");
             ManageUsersToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Керування персоналом'");
             StatisticsToolStripMenuItem.Click += (s, e) => MessageBox.Show("Тут буде форма 'Статистика'");
         }
@@ -247,6 +247,12 @@ namespace program
         {
             NewAppointmentForm addAppointment = new NewAppointmentForm(_currentUser);
             OpenPage(new NewAppointmentForm(_currentUser));
+        }
+
+        private void MyQueueToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DoctorQueueForm doctorQueueForm = new DoctorQueueForm(_currentUser);
+            OpenPage(new program.Forms.Doctor.DoctorQueueForm(_currentUser));
         }
     }
 }

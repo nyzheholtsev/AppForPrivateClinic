@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Forms\Doctor\" />
     <Folder Include="Forms\chiefDoctor\" />
   </ItemGroup>
 

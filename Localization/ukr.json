@@ -75,7 +75,6 @@
 	],
 
 	// ============================================================
-
 	"NewAppointmentForm_Label_Patient": "Паціент:",
 	"NewAppointmentForm_Label_Doctor": "Лікар:",
 	"NewAppointmentForm_Label_Date": "Дата:",
@@ -83,6 +82,27 @@
 	"NewAppointmentForm_Button_Add": "Створити запис",
 	"NewAppointmentForm_Labell_GD": "Основна інформація",
 	"NewAppointmentForm_Message_Success": "Запис створено!",
-	"NewAppointmentForm_Label_haveNoAppointment": "Лікар не працює"
+	"NewAppointmentForm_Label_haveNoAppointment": "Лікар не працює",
+
+	// ============================================================
+	"DoctorQueue_Title": "Моя черга",
+	"DoctorQueue_Col_Time": "Час",
+	"DoctorQueue_Col_Patient": "Пацієнт",
+	"DoctorQueue_Col_Status": "Статус",
+	"DoctorQueue_Empty": "Черга пуста",
+	"DoctorQueue_Btn_Start": "Почати прийом",
+	"DoctorQueue_Btn_Continue": "Продовжити прийом",
+	"DoctorQueue_Btn_Absent": "Пацієнт не прийшов",
+	"DoctorQueue_Msg_AbsentConfirm": "Відмітити, що {0} не прийшов?",
+
+	// ============================================================
+	"DoctorConsultation_Title": "Прийом пацієнта",
+	"DoctorConsultation_Label_Diagnosis": "Діагноз:",
+	"DoctorConsultation_Label_Treatment": "Лікування:",
+	"DoctorConsultation_Label_Notes": "Нотатки:",
+	"DoctorConsultation_Btn_Finish": "Завершити прийом",
+	"DoctorConsultation_Btn_Edit": "Редагувати",
+	"DoctorConsultation_Btn_Close": "Закрити",
+	"DoctorConsultation_Msg_Success": "Прийом успішно завершено!"
 
 }

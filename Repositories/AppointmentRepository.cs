@@ -71,5 +71,23 @@ namespace program.Repositories
                 MessageBox.Show($"Помилка створення запису: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        public void UpdateStatus(int appointmentId, AppointmentStatus status)
+        {
+            string sql = "UPDATE Appointments SET Status = @status WHERE AppointmentID = @id";
+            try
+            {
+                using (var connection = GetConnection())
+                using (var command = new SQLiteCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@status", status.ToString());
+                    command.Parameters.AddWithValue("@id", appointmentId);
+                    command.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Помилка оновлення статусу: {ex.Message}");
+            }
+        }
     }
 }

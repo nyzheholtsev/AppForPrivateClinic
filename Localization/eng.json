@@ -81,5 +81,26 @@
   "NewAppointmentForm_Button_Add": "Create apointment",
   "NewAppointmentForm_Labell_GD": "Basicle info",
   "NewAppointmentForm_Message_Success": "Appointment create",
-  "NewAppointmentForm_Label_haveNoAppointment": "Sorry, we have not appointment"
+  "NewAppointmentForm_Label_haveNoAppointment": "Sorry, we have not appointment",
+
+  // ============================================================
+  "DoctorQueue_Title": "My Queue",
+  "DoctorQueue_Col_Time": "Time",
+  "DoctorQueue_Col_Patient": "Patient",
+  "DoctorQueue_Col_Status": "Status",
+  "DoctorQueue_Empty": "Queue is empty",
+  "DoctorQueue_Btn_Start": "Start Appointment",
+  "DoctorQueue_Btn_Continue": "Continue Appointment",
+  "DoctorQueue_Btn_Absent": "Patient Absent",
+  "DoctorQueue_Msg_AbsentConfirm": "Mark {0} as absent?",
+
+  // ============================================================
+  "DoctorConsultation_Title": "Consultation",
+  "DoctorConsultation_Label_Diagnosis": "Diagnosis:",
+  "DoctorConsultation_Label_Treatment": "Treatment:",
+  "DoctorConsultation_Label_Notes": "Notes:",
+  "DoctorConsultation_Btn_Finish": "Finish Appointment",
+  "DoctorConsultation_Btn_Edit": "Edit",
+  "DoctorConsultation_Btn_Close": "Close",
+  "DoctorConsultation_Msg_Success": "Appointment finished successfully!"
 }

@@ -131,6 +131,7 @@
             MyQueueToolStripMenuItem.Name = "MyQueueToolStripMenuItem";
             MyQueueToolStripMenuItem.Size = new Size(224, 28);
             MyQueueToolStripMenuItem.Text = "MyQueue";
+            MyQueueToolStripMenuItem.Click += MyQueueToolStripMenuItem_Click;
             // 
             // AdminToolStripMenuItem
             // 
@@ -145,14 +146,14 @@
             // 
             ManageUsersToolStripMenuItem.BackColor = Color.Gray;
             ManageUsersToolStripMenuItem.Name = "ManageUsersToolStripMenuItem";
-            ManageUsersToolStripMenuItem.Size = new Size(224, 28);
+            ManageUsersToolStripMenuItem.Size = new Size(198, 28);
             ManageUsersToolStripMenuItem.Text = "ManageUsers";
             // 
             // StatisticsToolStripMenuItem
             // 
             StatisticsToolStripMenuItem.BackColor = Color.Gray;
             StatisticsToolStripMenuItem.Name = "StatisticsToolStripMenuItem";
-            StatisticsToolStripMenuItem.Size = new Size(224, 28);
+            StatisticsToolStripMenuItem.Size = new Size(198, 28);
             StatisticsToolStripMenuItem.Text = "Statistics";
             // 
             // MainStatusStrip
