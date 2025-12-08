@@ -118,7 +118,7 @@ namespace program.Forms.Administrator
             }
         }
 
-        private Button CreateSlotButton(string time, bool isAvailable)
+        private Button CreateSlotButton(string time, bool isAvailable) 
         {
             Button btn = new Button();
             btn.Text = time;
@@ -127,6 +127,7 @@ namespace program.Forms.Administrator
             btn.FlatStyle = FlatStyle.Flat;
             btn.Tag = isAvailable;
 
+            //цвета
             if (isAvailable)
             {
                 //доступные
@@ -194,6 +195,9 @@ namespace program.Forms.Administrator
             DateTime date = dtpDate.Value;
 
             _appointmentRepository.Create(patientId, doctorId, date, _selectedTime);
+
+            Logger.Log($"Created appointment for PatientID: {patientId} on {date.ToShortDateString()} at {_selectedTime}", _currentUser.Username);
+
             MessageBox.Show(LocalizationManager.GetString("NewAppointmentForm_Message_Success"),
                             "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

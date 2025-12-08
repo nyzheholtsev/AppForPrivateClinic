@@ -1,5 +1,5 @@
 ﻿using program.dbClass;
-using program.dbClass.Models; // Для DoctorScheduleModel
+using program.dbClass.Models; 
 using System;
 using System.Data.SQLite;
 using System.Windows.Forms;
@@ -9,8 +9,7 @@ namespace program.Repositories
     public class DoctorScheduleRepository : BaseRepository
     {
         public void Save(int doctorId, DateTime date, string start, string end, string lStart, string lEnd)
-        {
-            // Проверяем, есть ли уже запись
+        { 
             var existing = GetSchedule(doctorId, date);
             string sql;
 
@@ -55,11 +54,11 @@ namespace program.Repositories
 
         public void AutoGenerate(int doctorId, int year, int month)
         {
-            // Удаляем старое расписание на этот месяц (чтобы не было дублей)
+            
             string deleteSql = @"DELETE FROM DoctorSchedules 
                          WHERE UserID = @uid AND strftime('%Y-%m', WorkDate) = @ym";
 
-            // Стандарт: 09:00-17:00, обед 13:00-14:00
+            
             string insertSql = @"INSERT INTO DoctorSchedules (UserID, WorkDate, StartTime, EndTime, LunchStart, LunchEnd)
                          VALUES (@uid, @date, '09:00', '17:00', '13:00', '14:00')";
 
@@ -68,7 +67,7 @@ namespace program.Repositories
             {
                 try
                 {
-                    // 1. Чистка
+
                     using (var cmdDel = new SQLiteCommand(deleteSql, conn))
                     {
                         cmdDel.Parameters.AddWithValue("@uid", doctorId);
@@ -76,7 +75,7 @@ namespace program.Repositories
                         cmdDel.ExecuteNonQuery();
                     }
 
-                    // 2. Генерация
+
                     int days = DateTime.DaysInMonth(year, month);
                     using (var cmdIns = new SQLiteCommand(insertSql, conn))
                     {
@@ -131,6 +130,55 @@ namespace program.Repositories
                 MessageBox.Show($"Помилка розкладу: {ex.Message}", "Помилка БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return null;
+        }
+
+        public void AutoGenerateCurrentWeek(int doctorId)
+        {
+            DateTime today = DateTime.Now.Date;
+
+
+            int daysSinceMonday = ((int)today.DayOfWeek - (int)DayOfWeek.Monday);
+            if (daysSinceMonday < 0) daysSinceMonday += 7;
+            DateTime monday = today.AddDays(-daysSinceMonday);
+
+            string deleteSql = "DELETE FROM DoctorSchedules WHERE UserID = @uid AND WorkDate = @date";
+            string insertSql = @"INSERT INTO DoctorSchedules (UserID, WorkDate, StartTime, EndTime, LunchStart, LunchEnd)
+                                 VALUES (@uid, @date, '09:00', '17:00', '13:00', '14:00')";
+
+            using (var conn = GetConnection())
+            using (var trans = conn.BeginTransaction())
+            {
+                try
+                {
+                    
+                    for (int i = 0; i < 5; i++)
+                    {
+                        DateTime workDay = monday.AddDays(i);
+                        string dateStr = workDay.ToString("yyyy-MM-dd");
+
+
+                        using (var cmdDel = new SQLiteCommand(deleteSql, conn))
+                        {
+                            cmdDel.Parameters.AddWithValue("@uid", doctorId);
+                            cmdDel.Parameters.AddWithValue("@date", dateStr);
+                            cmdDel.ExecuteNonQuery();
+                        }
+
+                        using (var cmdIns = new SQLiteCommand(insertSql, conn))
+                        {
+                            cmdIns.Parameters.AddWithValue("@uid", doctorId);
+                            cmdIns.Parameters.AddWithValue("@date", dateStr);
+                            cmdIns.ExecuteNonQuery();
+                        }
+                    }
+                    trans.Commit();
+                }
+                catch
+                {
+                    trans.Rollback();
+                    throw;
+                }
+            }
         }
     }
 }

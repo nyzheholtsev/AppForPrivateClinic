@@ -10,14 +10,16 @@ namespace program
         [STAThread]
         static void Main()
         {
+            Application.ThreadException += (s, e) => Logger.LogError("Critical UI Error", e.Exception);
+            AppDomain.CurrentDomain.UnhandledException += (s, e) => Logger.LogError("Critical Non-UI Error", (Exception)e.ExceptionObject);
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             DbInitializer.Initialize();
 
-            //PatientSeeder seeder = new PatientSeeder();
-            //seeder.Seed(50);
-          
+            //DataSeeder.SeedAllData();
+
             using (LoginForm loginForm = new LoginForm())
             {
                 if (loginForm.ShowDialog() == DialogResult.OK)

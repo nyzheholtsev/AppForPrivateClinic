@@ -14,11 +14,8 @@
         {
             lblDoctor = new Label();
             cmbDoctors = new ComboBox();
-            monthCalendar = new MonthCalendar();
+            dtpWorkDate = new program.Controls.CustomDatePicker();
             panelRight = new Panel();
-            grpAuto = new GroupBox();
-            btnAutoGenerate = new Button();
-            dtpAutoMonth = new DateTimePicker();
             btnDeleteDay = new Button();
             btnSaveDay = new Button();
             lblDash2 = new Label();
@@ -29,8 +26,8 @@
             dtpEnd = new DateTimePicker();
             dtpStart = new DateTimePicker();
             lblWork = new Label();
+            btnAutoSchedule = new Button();
             panelRight.SuspendLayout();
-            grpAuto.SuspendLayout();
             SuspendLayout();
             // 
             // lblDoctor
@@ -38,7 +35,7 @@
             lblDoctor.AutoSize = true;
             lblDoctor.Font = new Font("Palatino Linotype", 10.2F);
             lblDoctor.ForeColor = Color.Wheat;
-            lblDoctor.Location = new Point(20, 20);
+            lblDoctor.Location = new Point(20, 44);
             lblDoctor.Name = "lblDoctor";
             lblDoctor.Size = new Size(62, 23);
             lblDoctor.TabIndex = 3;
@@ -46,28 +43,31 @@
             // 
             // cmbDoctors
             // 
+            cmbDoctors.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmbDoctors.AutoCompleteSource = AutoCompleteSource.ListItems;
             cmbDoctors.BackColor = Color.Wheat;
-            cmbDoctors.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbDoctors.FlatStyle = FlatStyle.Flat;
             cmbDoctors.Font = new Font("Palatino Linotype", 10.2F);
             cmbDoctors.FormattingEnabled = true;
-            cmbDoctors.Location = new Point(90, 17);
+            cmbDoctors.Location = new Point(20, 70);
             cmbDoctors.Name = "cmbDoctors";
             cmbDoctors.Size = new Size(300, 31);
             cmbDoctors.TabIndex = 2;
             // 
-            // monthCalendar
+            // dtpWorkDate
             // 
-            monthCalendar.Location = new Point(20, 70);
-            monthCalendar.MaxSelectionCount = 1;
-            monthCalendar.Name = "monthCalendar";
-            monthCalendar.ShowTodayCircle = false;
-            monthCalendar.TabIndex = 1;
+            dtpWorkDate.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dtpWorkDate.Location = new Point(20, 123);
+            dtpWorkDate.MaxDate = new DateTime(9999, 12, 31, 23, 59, 59, 999);
+            dtpWorkDate.MinDate = new DateTime(0L);
+            dtpWorkDate.Name = "dtpWorkDate";
+            dtpWorkDate.Size = new Size(300, 43);
+            dtpWorkDate.TabIndex = 1;
+            dtpWorkDate.Value = new DateTime(2025, 12, 7, 9, 38, 32, 681);
             // 
             // panelRight
             // 
             panelRight.BorderStyle = BorderStyle.FixedSingle;
-            panelRight.Controls.Add(grpAuto);
             panelRight.Controls.Add(btnDeleteDay);
             panelRight.Controls.Add(btnSaveDay);
             panelRight.Controls.Add(lblDash2);
@@ -80,43 +80,8 @@
             panelRight.Controls.Add(lblWork);
             panelRight.Location = new Point(338, 70);
             panelRight.Name = "panelRight";
-            panelRight.Size = new Size(400, 320);
+            panelRight.Size = new Size(400, 176);
             panelRight.TabIndex = 0;
-            // 
-            // grpAuto
-            // 
-            grpAuto.Controls.Add(btnAutoGenerate);
-            grpAuto.Controls.Add(dtpAutoMonth);
-            grpAuto.Font = new Font("Palatino Linotype", 10.2F);
-            grpAuto.ForeColor = Color.Wheat;
-            grpAuto.Location = new Point(20, 170);
-            grpAuto.Name = "grpAuto";
-            grpAuto.Size = new Size(350, 130);
-            grpAuto.TabIndex = 0;
-            grpAuto.TabStop = false;
-            grpAuto.Text = "Auto Schedule";
-            // 
-            // btnAutoGenerate
-            // 
-            btnAutoGenerate.BackColor = Color.DimGray;
-            btnAutoGenerate.FlatStyle = FlatStyle.Flat;
-            btnAutoGenerate.Font = new Font("Palatino Linotype", 10F, FontStyle.Bold);
-            btnAutoGenerate.Location = new Point(20, 80);
-            btnAutoGenerate.Name = "btnAutoGenerate";
-            btnAutoGenerate.Size = new Size(200, 35);
-            btnAutoGenerate.TabIndex = 0;
-            btnAutoGenerate.Text = "Fill Month";
-            btnAutoGenerate.UseVisualStyleBackColor = false;
-            // 
-            // dtpAutoMonth
-            // 
-            dtpAutoMonth.CustomFormat = "MMMM yyyy";
-            dtpAutoMonth.Format = DateTimePickerFormat.Custom;
-            dtpAutoMonth.Location = new Point(20, 40);
-            dtpAutoMonth.Name = "dtpAutoMonth";
-            dtpAutoMonth.ShowUpDown = true;
-            dtpAutoMonth.Size = new Size(200, 30);
-            dtpAutoMonth.TabIndex = 1;
             // 
             // btnDeleteDay
             // 
@@ -124,9 +89,9 @@
             btnDeleteDay.FlatStyle = FlatStyle.Flat;
             btnDeleteDay.Font = new Font("Palatino Linotype", 10F, FontStyle.Bold);
             btnDeleteDay.ForeColor = Color.LightCoral;
-            btnDeleteDay.Location = new Point(180, 110);
+            btnDeleteDay.Location = new Point(180, 114);
             btnDeleteDay.Name = "btnDeleteDay";
-            btnDeleteDay.Size = new Size(190, 35);
+            btnDeleteDay.Size = new Size(190, 45);
             btnDeleteDay.TabIndex = 1;
             btnDeleteDay.Text = "Delete (Day Off)";
             btnDeleteDay.UseVisualStyleBackColor = false;
@@ -137,9 +102,9 @@
             btnSaveDay.FlatStyle = FlatStyle.Flat;
             btnSaveDay.Font = new Font("Palatino Linotype", 10F, FontStyle.Bold);
             btnSaveDay.ForeColor = Color.Wheat;
-            btnSaveDay.Location = new Point(20, 110);
+            btnSaveDay.Location = new Point(15, 114);
             btnSaveDay.Name = "btnSaveDay";
-            btnSaveDay.Size = new Size(150, 35);
+            btnSaveDay.Size = new Size(150, 45);
             btnSaveDay.TabIndex = 2;
             btnSaveDay.Text = "Save Day";
             btnSaveDay.UseVisualStyleBackColor = false;
@@ -148,7 +113,7 @@
             // 
             lblDash2.AutoSize = true;
             lblDash2.ForeColor = Color.Wheat;
-            lblDash2.Location = new Point(220, 65);
+            lblDash2.Location = new Point(255, 71);
             lblDash2.Name = "lblDash2";
             lblDash2.Size = new Size(24, 20);
             lblDash2.TabIndex = 3;
@@ -159,7 +124,7 @@
             dtpLunchEnd.CustomFormat = "HH:mm";
             dtpLunchEnd.Font = new Font("Palatino Linotype", 10.2F);
             dtpLunchEnd.Format = DateTimePickerFormat.Custom;
-            dtpLunchEnd.Location = new Point(250, 62);
+            dtpLunchEnd.Location = new Point(290, 65);
             dtpLunchEnd.Name = "dtpLunchEnd";
             dtpLunchEnd.ShowUpDown = true;
             dtpLunchEnd.Size = new Size(80, 30);
@@ -171,7 +136,7 @@
             dtpLunchStart.CustomFormat = "HH:mm";
             dtpLunchStart.Font = new Font("Palatino Linotype", 10.2F);
             dtpLunchStart.Format = DateTimePickerFormat.Custom;
-            dtpLunchStart.Location = new Point(130, 62);
+            dtpLunchStart.Location = new Point(165, 65);
             dtpLunchStart.Name = "dtpLunchStart";
             dtpLunchStart.ShowUpDown = true;
             dtpLunchStart.Size = new Size(80, 30);
@@ -193,7 +158,7 @@
             // 
             lblDash1.AutoSize = true;
             lblDash1.ForeColor = Color.Wheat;
-            lblDash1.Location = new Point(220, 15);
+            lblDash1.Location = new Point(255, 20);
             lblDash1.Name = "lblDash1";
             lblDash1.Size = new Size(24, 20);
             lblDash1.TabIndex = 7;
@@ -204,7 +169,7 @@
             dtpEnd.CustomFormat = "HH:mm";
             dtpEnd.Font = new Font("Palatino Linotype", 10.2F);
             dtpEnd.Format = DateTimePickerFormat.Custom;
-            dtpEnd.Location = new Point(250, 12);
+            dtpEnd.Location = new Point(290, 15);
             dtpEnd.Name = "dtpEnd";
             dtpEnd.ShowUpDown = true;
             dtpEnd.Size = new Size(80, 30);
@@ -216,7 +181,7 @@
             dtpStart.CustomFormat = "HH:mm";
             dtpStart.Font = new Font("Palatino Linotype", 10.2F);
             dtpStart.Format = DateTimePickerFormat.Custom;
-            dtpStart.Location = new Point(130, 12);
+            dtpStart.Location = new Point(165, 15);
             dtpStart.Name = "dtpStart";
             dtpStart.ShowUpDown = true;
             dtpStart.Size = new Size(80, 30);
@@ -234,14 +199,28 @@
             lblWork.TabIndex = 10;
             lblWork.Text = "Work Time";
             // 
+            // btnAutoSchedule
+            // 
+            btnAutoSchedule.BackColor = Color.DimGray;
+            btnAutoSchedule.FlatStyle = FlatStyle.Flat;
+            btnAutoSchedule.Font = new Font("Palatino Linotype", 10.2F, FontStyle.Bold);
+            btnAutoSchedule.ForeColor = Color.Wheat;
+            btnAutoSchedule.Location = new Point(20, 185);
+            btnAutoSchedule.Name = "btnAutoSchedule";
+            btnAutoSchedule.Size = new Size(300, 45);
+            btnAutoSchedule.TabIndex = 11;
+            btnAutoSchedule.Text = "Auto Schedule (Week)";
+            btnAutoSchedule.UseVisualStyleBackColor = false;
+            // 
             // DoctorScheduleForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Gray;
-            ClientSize = new Size(750, 450);
+            ClientSize = new Size(750, 258);
+            Controls.Add(btnAutoSchedule);
             Controls.Add(panelRight);
-            Controls.Add(monthCalendar);
+            Controls.Add(dtpWorkDate);
             Controls.Add(cmbDoctors);
             Controls.Add(lblDoctor);
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -251,15 +230,13 @@
             Text = "Schedule";
             panelRight.ResumeLayout(false);
             panelRight.PerformLayout();
-            grpAuto.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
-        // Объявление полей
         private System.Windows.Forms.Label lblDoctor;
         private System.Windows.Forms.ComboBox cmbDoctors;
-        private System.Windows.Forms.MonthCalendar monthCalendar;
+        private program.Controls.CustomDatePicker dtpWorkDate;
         private System.Windows.Forms.Panel panelRight;
         private System.Windows.Forms.Label lblWork;
         private System.Windows.Forms.DateTimePicker dtpStart;
@@ -271,8 +248,6 @@
         private System.Windows.Forms.Label lblDash2;
         private System.Windows.Forms.Button btnSaveDay;
         private System.Windows.Forms.Button btnDeleteDay;
-        private System.Windows.Forms.GroupBox grpAuto;
-        private System.Windows.Forms.DateTimePicker dtpAutoMonth;
-        private System.Windows.Forms.Button btnAutoGenerate;
+        private System.Windows.Forms.Button btnAutoSchedule;
     }
 }

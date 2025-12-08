@@ -48,11 +48,9 @@ namespace program.Repositories
             return null;
         }
 
-        // --- ИЗМЕНЕННЫЙ МЕТОД ---
         public List<UserModel> GetAllUsers()
         {
             var list = new List<UserModel>();
-            // Добавили WHERE u.IsActive = 1
             string sql = @"
                 SELECT u.UserID, u.FullName, u.Specialization, u.Username, u.IsActive, r.RoleName
                 FROM Users u 

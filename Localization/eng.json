@@ -123,7 +123,7 @@
   "ManageUsers_Col_Spec": "Specialization",
   "ManageUsers_Col_Active": "Active",
   "ManageUsers_Btn_Add": "Add Staff",
-  "ManageUsers_Btn_Fire": "Fire / Restore",
+  "ManageUsers_Btn_Fire": "Fire",
   "ManageUsers_Btn_Schedule": "Work Schedule",
   "ManageUsers_Btn_Auto": "Auto-Schedule",
 
@@ -134,8 +134,6 @@
   "Schedule_Label_LunchTime": "Lunch Break:",
   "Schedule_Btn_Save": "Save Day",
   "Schedule_Btn_Delete": "Set as Day Off",
-  "Schedule_Group_Auto": "Auto-Fill (Weekdays 09:00 - 17:00)",
-  "Schedule_Btn_Auto": "Fill Month",
 
   // ============================================================
   "Stats_Title": "Statistics & Reports",
@@ -146,5 +144,27 @@
   "Stats_Type_Workload": "Doctors Workload",
   "Stats_Type_Visits": "Visits by Date",
   "Stats_Type_Diagnoses": "Common Diagnoses",
-  "Stats_Msg_ExportSuccess": "Report successfully saved to:\n{0}"
+  "Stats_Msg_ExportSuccess": "Report successfully saved to:\n{0}",
+  "Stats_Col_DoctorName": "Doctor Name",
+  "Stats_Col_PatientsCount": "Patients Count",
+  "Stats_Col_Date": "Date",
+  "Stats_Col_TotalVisits": "Total Visits",
+  "Stats_Col_Diagnosis": "Diagnosis",
+  "Stats_Col_Count": "Count",
+
+  // ============================================================
+  "UserAddForm_Title": "Add New User",
+  "UserAddForm_Label_FullName": "Full Name",
+  "UserAddForm_Label_Username": "Username",
+  "UserAddForm_Label_Password": "Password",
+  "UserAddForm_Label_Role": "Role",
+  "UserAddForm_Label_Spec": "Specialization",
+  "UserAddForm_Btn_Save": "Save User",
+  "UserAddForm_Btn_Cancel": "Cancel",
+  "UserAddForm_Error_Empty": "Please fill in all required fields.",
+  "UserAddForm_Error_SpecRequired": "Specialization is required for Doctors.",
+  "UserAddForm_Error_UserExists": "This username is already taken.",
+  "UserAddForm_Msg_Success": "User added successfully!"
+
+  // ============================================================
 }

@@ -8,7 +8,6 @@ namespace program.Repositories
 {
     public class StatisticsRepository : BaseRepository
     {
-        // Отчет 1: Загрузка врачей (Топ по количеству завершенных приемов)
         public DataTable GetDoctorWorkload(DateTime start, DateTime end)
         {
             string sql = @"
@@ -23,7 +22,6 @@ namespace program.Repositories
             return ExecuteQuery(sql, start, end);
         }
 
-        // Отчет 2: Количество приемов по дням
         public DataTable GetVisitsByDate(DateTime start, DateTime end)
         {
             string sql = @"
@@ -37,10 +35,9 @@ namespace program.Repositories
             return ExecuteQuery(sql, start, end);
         }
 
-        // Отчет 3: Статистика диагнозов
         public DataTable GetDiagnosisStats(DateTime start, DateTime end)
         {
-            // Связываем MedicalRecords -> Appointments, чтобы фильтровать по дате
+
             string sql = @"
                 SELECT m.Diagnosis, COUNT(*) AS 'Count'
                 FROM MedicalRecords m
@@ -70,8 +67,7 @@ namespace program.Repositories
                 }
             }
             catch (Exception ex)
-            {
-                // Логирование можно добавить сюда
+            { 
                 System.Windows.Forms.MessageBox.Show("Error loading stats: " + ex.Message);
             }
             return dt;

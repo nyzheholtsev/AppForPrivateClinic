@@ -124,7 +124,7 @@
 	"ManageUsers_Col_Spec": "Спеціалізація",
 	"ManageUsers_Col_Active": "Активний",
 	"ManageUsers_Btn_Add": "Додати працівника",
-	"ManageUsers_Btn_Fire": "Звільнити / Поновити",
+	"ManageUsers_Btn_Fire": "Звільнити",
 	"ManageUsers_Btn_Schedule": "Графік роботи",
 	"ManageUsers_Btn_Auto": "Авто-розклад",
 
@@ -135,8 +135,6 @@
 	"Schedule_Label_LunchTime": "Обідня перерва:",
 	"Schedule_Btn_Save": "Зберегти день",
 	"Schedule_Btn_Delete": "Зробити вихідним",
-	"Schedule_Group_Auto": "Авто-заповнення (Будні 09:00 - 17:00)",
-	"Schedule_Btn_Auto": "Заповнити місяць",
 
 	// ============================================================
 	"Stats_Title": "Статистика та Звіти",
@@ -147,6 +145,28 @@
 	"Stats_Type_Workload": "Завантаженість лікарів",
 	"Stats_Type_Visits": "Відвідування по днях",
 	"Stats_Type_Diagnoses": "Популярні діагнози",
-	"Stats_Msg_ExportSuccess": "Звіт успішно збережено у файл:\n{0}"
+	"Stats_Msg_ExportSuccess": "Звіт успішно збережено у файл:\n{0}",
+	"Stats_Col_DoctorName": "ПІБ Лікаря",
+	"Stats_Col_PatientsCount": "Кількість пацієнтів",
+	"Stats_Col_Date": "Дата",
+	"Stats_Col_TotalVisits": "Всього візитів",
+	"Stats_Col_Diagnosis": "Діагноз",
+	"Stats_Col_Count": "Кількість",
+
+	// ============================================================
+	"UserAddForm_Title": "Додати користувача",
+	"UserAddForm_Label_FullName": "ПІБ",
+	"UserAddForm_Label_Username": "Логін",
+	"UserAddForm_Label_Password": "Пароль",
+	"UserAddForm_Label_Role": "Посада",
+	"UserAddForm_Label_Spec": "Спеціалізація",
+	"UserAddForm_Btn_Save": "Зберегти",
+	"UserAddForm_Btn_Cancel": "Скасувати",
+	"UserAddForm_Error_Empty": "Будь ласка, заповніть усі обов'язкові поля.",
+	"UserAddForm_Error_SpecRequired": "Для лікаря необхідно вказати спеціалізацію.",
+	"UserAddForm_Error_UserExists": "Користувач з таким логіном вже існує.",
+	"UserAddForm_Msg_Success": "Користувача успішно додано!"
+
+	// ============================================================
 
 }

@@ -58,6 +58,7 @@ namespace program.Forms.Doctor
             );
 
             _apptRepo.UpdateStatus(_appointment.AppointmentID, AppointmentStatus.Completed);
+            Logger.Log($"Completed consultation for AppointmentID: {_appointment.AppointmentID}. Diagnosis: {txtDiagnosis.Text}", "Doctor");
             this.Close();
         }
 

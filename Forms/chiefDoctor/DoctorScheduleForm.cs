@@ -7,6 +7,7 @@ using program.Repositories;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using program.Controls;
 
 namespace program.Forms.chiefDoctor
 {
@@ -24,12 +25,18 @@ namespace program.Forms.chiefDoctor
             UpdateLocalization();
             LoadDoctors();
 
-            // Привязка событий
-            monthCalendar.DateChanged += (s, e) => LoadScheduleForDate();
+            dtpWorkDate.ValueChanged += (s, e) => LoadScheduleForDate(); // + расписание
+
             cmbDoctors.SelectedIndexChanged += (s, e) => LoadScheduleForDate();
+
+            cmbDoctors.KeyDown += (s, e) =>
+            {
+                if (e.KeyCode == Keys.Enter) LoadScheduleForDate();
+            };
+
             btnSaveDay.Click += BtnSaveDay_Click;
             btnDeleteDay.Click += BtnDeleteDay_Click;
-            btnAutoGenerate.Click += BtnAutoGenerate_Click;
+            btnAutoSchedule.Click += BtnAutoSchedule_Click;
         }
 
         public void UpdateLocalization()
@@ -40,8 +47,9 @@ namespace program.Forms.chiefDoctor
             lblLunch.Text = LocalizationManager.GetString("Schedule_Label_LunchTime");
             btnSaveDay.Text = LocalizationManager.GetString("Schedule_Btn_Save");
             btnDeleteDay.Text = LocalizationManager.GetString("Schedule_Btn_Delete");
-            grpAuto.Text = LocalizationManager.GetString("Schedule_Group_Auto");
-            btnAutoGenerate.Text = LocalizationManager.GetString("Schedule_Btn_Auto");
+            btnAutoSchedule.Text = LocalizationManager.GetString("ManageUsers_Btn_Auto");
+
+            dtpWorkDate.UpdateLocalization();
         }
 
         private void LoadDoctors()
@@ -54,15 +62,30 @@ namespace program.Forms.chiefDoctor
 
         private void LoadScheduleForDate()
         {
-            if (cmbDoctors.SelectedValue == null) return;
-            int doctorId = (int)cmbDoctors.SelectedValue;
-            DateTime date = monthCalendar.SelectionStart;
+
+            if (cmbDoctors.SelectedValue == null)
+            {
+                ResetTimePickers();
+                btnDeleteDay.Enabled = false;
+                return;
+            }
+
+            int doctorId;
+            try
+            {
+                doctorId = (int)cmbDoctors.SelectedValue;
+            }
+            catch
+            {
+                return;
+            }
+
+            DateTime date = dtpWorkDate.Value;
 
             var schedule = _scheduleRepo.GetSchedule(doctorId, date);
 
             if (schedule != null)
             {
-                // Если запись есть, заполняем поля
                 dtpStart.Value = DateTime.Parse(schedule.StartTime);
                 dtpEnd.Value = DateTime.Parse(schedule.EndTime);
                 dtpLunchStart.Value = DateTime.Parse(schedule.LunchStart);
@@ -71,7 +94,6 @@ namespace program.Forms.chiefDoctor
             }
             else
             {
-                // Если нет - ставим дефолт и блокируем удаление
                 ResetTimePickers();
                 btnDeleteDay.Enabled = false;
             }
@@ -88,10 +110,14 @@ namespace program.Forms.chiefDoctor
 
         private void BtnSaveDay_Click(object sender, EventArgs e)
         {
-            if (cmbDoctors.SelectedValue == null) return;
+            if (cmbDoctors.SelectedValue == null)
+            {
+                MessageBox.Show("Лікаря не знайдено! Будь ласка, виберіть лікаря зі списку.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             int doctorId = (int)cmbDoctors.SelectedValue;
-            DateTime date = monthCalendar.SelectionStart;
+            DateTime date = dtpWorkDate.Value;
 
             string start = dtpStart.Value.ToString("HH:mm");
             string end = dtpEnd.Value.ToString("HH:mm");
@@ -102,7 +128,7 @@ namespace program.Forms.chiefDoctor
             {
                 _scheduleRepo.Save(doctorId, date, start, end, lStart, lEnd);
                 MessageBox.Show("Schedule saved!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                btnDeleteDay.Enabled = true; // Теперь можно удалять
+                btnDeleteDay.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -114,7 +140,8 @@ namespace program.Forms.chiefDoctor
         {
             if (cmbDoctors.SelectedValue == null) return;
             int doctorId = (int)cmbDoctors.SelectedValue;
-            DateTime date = monthCalendar.SelectionStart;
+
+            DateTime date = dtpWorkDate.Value;
 
             if (MessageBox.Show("Make this day a day off?", "Confirm", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -124,28 +151,30 @@ namespace program.Forms.chiefDoctor
             }
         }
 
-        private void BtnAutoGenerate_Click(object sender, EventArgs e)
+        private void BtnAutoSchedule_Click(object sender, EventArgs e)
         {
-            if (cmbDoctors.SelectedValue == null) return;
+            if (cmbDoctors.SelectedValue == null)
+            {
+                MessageBox.Show("Будь ласка, оберіть лікаря.", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             int doctorId = (int)cmbDoctors.SelectedValue;
+            string doctorName = cmbDoctors.Text;
 
-            // Берем год и месяц из авто-пикера
-            int year = dtpAutoMonth.Value.Year;
-            int month = dtpAutoMonth.Value.Month;
+            string msg = $"Згенерувати розклад на ЦЕЙ тиждень (Пн-Пт) для лікаря {doctorName}?\nІснуючі записи на цей тиждень будуть перезаписані!";
 
-            string msg = $"Auto-fill schedule for {dtpAutoMonth.Value:MMMM yyyy}?\nExisting schedule for this month will be overwritten!";
-
-            if (MessageBox.Show(msg, "Confirm Auto-Schedule", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (MessageBox.Show(msg, "Авто-розклад", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 try
                 {
-                    _scheduleRepo.AutoGenerate(doctorId, year, month);
-                    MessageBox.Show("Schedule generated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    LoadScheduleForDate(); // Обновить текущий вид
+                    _scheduleRepo.AutoGenerateCurrentWeek(doctorId);
+                    MessageBox.Show("Розклад успішно створено (Пн-Пт, 09:00 - 17:00).", "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadScheduleForDate();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error: {ex.Message}");
+                    MessageBox.Show($"Помилка генерації: {ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

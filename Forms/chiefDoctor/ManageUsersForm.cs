@@ -18,8 +18,36 @@ namespace program.Forms.chiefDoctor
             _currentUser = user;
             _repo = new UserRepository();
 
-            // Отключаем автогенерацию колонок, чтобы использовать наши настройки из Дизайнера
-            dgvUsers.AutoGenerateColumns = false;
+            dgvUsers.AutoGenerateColumns = false; 
+
+            dgvUsers.Columns.Clear();
+
+            DataGridViewTextBoxColumn colId = new DataGridViewTextBoxColumn();
+            colId.Name = "colID";
+            colId.DataPropertyName = "UserID";
+            colId.Visible = false;
+            dgvUsers.Columns.Add(colId);
+
+            DataGridViewTextBoxColumn colName = new DataGridViewTextBoxColumn();
+            colName.Name = "colName";
+            colName.HeaderText = "Name"; 
+            colName.DataPropertyName = "FullName";
+            colName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvUsers.Columns.Add(colName);
+
+            DataGridViewTextBoxColumn colRole = new DataGridViewTextBoxColumn();
+            colRole.Name = "colRole";
+            colRole.HeaderText = "Role";
+            colRole.DataPropertyName = "RoleLocalized"; 
+            colRole.Width = 150;
+            dgvUsers.Columns.Add(colRole);
+
+            DataGridViewTextBoxColumn colSpec = new DataGridViewTextBoxColumn();
+            colSpec.Name = "colSpec";
+            colSpec.HeaderText = "Specialization";
+            colSpec.DataPropertyName = "Specialization"; 
+            colSpec.Width = 150;
+            dgvUsers.Columns.Add(colSpec);
 
             UpdateLocalization();
             LoadUsers();
@@ -29,18 +57,14 @@ namespace program.Forms.chiefDoctor
         {
             this.Text = LocalizationManager.GetString("ManageUsers_Title");
 
-            // Обновляем заголовки колонок
             if (dgvUsers.Columns["colName"] != null) dgvUsers.Columns["colName"].HeaderText = LocalizationManager.GetString("ManageUsers_Col_Name");
             if (dgvUsers.Columns["colRole"] != null) dgvUsers.Columns["colRole"].HeaderText = LocalizationManager.GetString("ManageUsers_Col_Role");
             if (dgvUsers.Columns["colSpec"] != null) dgvUsers.Columns["colSpec"].HeaderText = LocalizationManager.GetString("ManageUsers_Col_Spec");
 
-            // Обновляем кнопки
             btnAddUser.Text = LocalizationManager.GetString("ManageUsers_Btn_Add");
             btnFireUser.Text = LocalizationManager.GetString("ManageUsers_Btn_Fire");
             btnEditSchedule.Text = LocalizationManager.GetString("ManageUsers_Btn_Schedule");
-            btnAutoSchedule.Text = LocalizationManager.GetString("ManageUsers_Btn_Auto");
 
-            // Перезагружаем список, чтобы обновились локализованные должности (RoleLocalized)
             LoadUsers();
         }
 
@@ -52,7 +76,13 @@ namespace program.Forms.chiefDoctor
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Переходимо до кроку 2: Додавання користувача");
+            using (UserAddForm addForm = new UserAddForm(_currentUser))
+            {
+                if (addForm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadUsers();
+                }
+            }
         }
 
         private void btnFireUser_Click(object sender, EventArgs e)
@@ -73,6 +103,7 @@ namespace program.Forms.chiefDoctor
             if (result == DialogResult.Yes)
             {
                 _repo.UpdateUserStatus(selectedUser.UserID, false);
+                Logger.Log($"Fired user: {selectedUser.FullName} (ID: {selectedUser.UserID})", _currentUser.Username);
                 LoadUsers();
             }
         }

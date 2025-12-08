@@ -12,12 +12,11 @@
 
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             dgvUsers = new DataGridView();
             panelControls = new Panel();
-            btnAutoSchedule = new Button();
             btnEditSchedule = new Button();
             btnFireUser = new Button();
             btnAddUser = new Button();
@@ -36,23 +35,23 @@
             dgvUsers.BackgroundColor = Color.Gray;
             dgvUsers.BorderStyle = BorderStyle.None;
             dgvUsers.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = Color.DimGray;
-            dataGridViewCellStyle4.Font = new Font("Palatino Linotype", 10F, FontStyle.Bold);
-            dataGridViewCellStyle4.ForeColor = Color.Wheat;
-            dataGridViewCellStyle4.SelectionBackColor = Color.DimGray;
-            dataGridViewCellStyle4.SelectionForeColor = Color.Wheat;
-            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
-            dgvUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = Color.DimGray;
+            dataGridViewCellStyle1.Font = new Font("Palatino Linotype", 10F, FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = Color.Wheat;
+            dataGridViewCellStyle1.SelectionBackColor = Color.DimGray;
+            dataGridViewCellStyle1.SelectionForeColor = Color.Wheat;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dgvUsers.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dgvUsers.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = Color.Gray;
-            dataGridViewCellStyle5.Font = new Font("Palatino Linotype", 10F);
-            dataGridViewCellStyle5.ForeColor = Color.Wheat;
-            dataGridViewCellStyle5.SelectionBackColor = Color.Gray;
-            dataGridViewCellStyle5.SelectionForeColor = Color.Wheat;
-            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.False;
-            dgvUsers.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Gray;
+            dataGridViewCellStyle2.Font = new Font("Palatino Linotype", 10F);
+            dataGridViewCellStyle2.ForeColor = Color.Wheat;
+            dataGridViewCellStyle2.SelectionBackColor = Color.Gray;
+            dataGridViewCellStyle2.SelectionForeColor = Color.Wheat;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dgvUsers.DefaultCellStyle = dataGridViewCellStyle2;
             dgvUsers.Dock = DockStyle.Left;
             dgvUsers.EnableHeadersVisualStyles = false;
             dgvUsers.GridColor = Color.DimGray;
@@ -63,17 +62,16 @@
             dgvUsers.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dgvUsers.RowHeadersVisible = false;
             dgvUsers.RowHeadersWidth = 51;
-            dataGridViewCellStyle6.BackColor = Color.Gray;
-            dataGridViewCellStyle6.ForeColor = Color.Wheat;
-            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(90, 90, 90);
-            dgvUsers.RowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle3.BackColor = Color.Gray;
+            dataGridViewCellStyle3.ForeColor = Color.Wheat;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(90, 90, 90);
+            dgvUsers.RowsDefaultCellStyle = dataGridViewCellStyle3;
             dgvUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvUsers.Size = new Size(544, 390);
             dgvUsers.TabIndex = 0;
             // 
             // panelControls
             // 
-            panelControls.Controls.Add(btnAutoSchedule);
             panelControls.Controls.Add(btnEditSchedule);
             panelControls.Controls.Add(btnFireUser);
             panelControls.Controls.Add(btnAddUser);
@@ -83,24 +81,12 @@
             panelControls.Size = new Size(256, 390);
             panelControls.TabIndex = 1;
             // 
-            // btnAutoSchedule
-            // 
-            btnAutoSchedule.FlatStyle = FlatStyle.Flat;
-            btnAutoSchedule.Font = new Font("Palatino Linotype", 10.2F);
-            btnAutoSchedule.ForeColor = Color.Wheat;
-            btnAutoSchedule.Location = new Point(20, 200);
-            btnAutoSchedule.Name = "btnAutoSchedule";
-            btnAutoSchedule.Size = new Size(200, 40);
-            btnAutoSchedule.TabIndex = 3;
-            btnAutoSchedule.Text = "Auto Schedule";
-            btnAutoSchedule.UseVisualStyleBackColor = true;
-            // 
             // btnEditSchedule
             // 
             btnEditSchedule.FlatStyle = FlatStyle.Flat;
             btnEditSchedule.Font = new Font("Palatino Linotype", 10.2F);
             btnEditSchedule.ForeColor = Color.Wheat;
-            btnEditSchedule.Location = new Point(20, 150);
+            btnEditSchedule.Location = new Point(20, 101);
             btnEditSchedule.Name = "btnEditSchedule";
             btnEditSchedule.Size = new Size(200, 40);
             btnEditSchedule.TabIndex = 2;
@@ -113,7 +99,7 @@
             btnFireUser.FlatStyle = FlatStyle.Flat;
             btnFireUser.Font = new Font("Palatino Linotype", 10.2F);
             btnFireUser.ForeColor = Color.Wheat;
-            btnFireUser.Location = new Point(20, 70);
+            btnFireUser.Location = new Point(20, 52);
             btnFireUser.Name = "btnFireUser";
             btnFireUser.Size = new Size(200, 40);
             btnFireUser.TabIndex = 1;
@@ -126,7 +112,7 @@
             btnAddUser.FlatStyle = FlatStyle.Flat;
             btnAddUser.Font = new Font("Palatino Linotype", 10.2F);
             btnAddUser.ForeColor = Color.Wheat;
-            btnAddUser.Location = new Point(20, 20);
+            btnAddUser.Location = new Point(20, 2);
             btnAddUser.Name = "btnAddUser";
             btnAddUser.Size = new Size(200, 40);
             btnAddUser.TabIndex = 0;
@@ -166,7 +152,6 @@
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.Button btnFireUser;
         private System.Windows.Forms.Button btnEditSchedule;
-        private System.Windows.Forms.Button btnAutoSchedule;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colRole;

@@ -54,9 +54,10 @@ namespace program.Forms
 
             _repository.Add(name, dob, phone);
 
+            Logger.Log($"Added new patient: {name}, Phone: {phone}", _currentUser.Username);
             MessageBox.Show(LocalizationManager.GetString("PatientAddForm_Message_Success"),
                             "Успіх", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            
             txtFullName.Clear();
             txtPhone.Clear();
             dtpDob.Value = DateTime.Now;

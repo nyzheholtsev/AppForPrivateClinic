@@ -1,5 +1,5 @@
 ﻿using System;
-using program.dbClass; // Нужно для доступа к UserRole и расширениям
+using program.dbClass; 
 
 namespace program.dbClass.Models
 {
@@ -24,7 +24,6 @@ namespace program.dbClass.Models
             }
         }
 
-        // Новое свойство для отображения в таблице
         public string RoleLocalized
         {
             get
